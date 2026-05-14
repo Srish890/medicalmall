@@ -1,0 +1,5 @@
+.claude
+.DS_Store
+uploads
+images/*_orig.*
+images/*_orig.png

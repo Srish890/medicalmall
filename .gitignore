@@ -1,0 +1,8 @@
+.DS_Store
+.claude
+.vercel
+uploads/
+images/*_orig.*
+images/*_orig.png
+node_modules/
+*.log
