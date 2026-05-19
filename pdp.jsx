@@ -15,11 +15,11 @@ const PDP = ({ navigate }) => {
       {/* breadcrumb */}
       <div className="shell" style={{ padding: "20px 32px 0", maxWidth: 1280, margin: "0 auto" }}>
         <div style={{ display: "flex", gap: 8, alignItems: "center", fontSize: 12.5, color: "var(--ink-500)" }}>
-          <button onClick={() => navigate("home")} style={{ color: "var(--ink-500)" }}>Home</button>
+          <button onClick={() => navigate("home-v2")} style={{ color: "var(--ink-500)" }}>Home</button>
           <Icon name="chevron" size={10} />
-          <button onClick={() => navigate("oncology")} style={{ color: "var(--ink-500)" }}>Oncology</button>
+          <button onClick={() => navigate("oncology-v2")} style={{ color: "var(--ink-500)" }}>Oncology</button>
           <Icon name="chevron" size={10} />
-          <button onClick={() => navigate("oncology-plp")} style={{ color: "var(--ink-500)" }}>Human Hair Wigs</button>
+          <button onClick={() => navigate("oncology-plp-v2")} style={{ color: "var(--ink-500)" }}>Human Hair Wigs</button>
           <Icon name="chevron" size={10} />
           <span style={{ color: "var(--ink-900)" }}>Women Adira premium wig</span>
         </div>

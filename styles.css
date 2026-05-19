@@ -1,6 +1,6 @@
-/* ==========  Medical Mall — Design Tokens  ========== */
+/* ==========  Medical Mall — Design Tokens (source: design.md)  ========== */
 :root {
-  /* Brand */
+  /* Brand — green */
   --green-900: #0E2A20;
   --green-800: #0F6A2E;
   --green-700: #16933F;
@@ -11,37 +11,75 @@
   --green-50:  #F1F6F2;
   --green-cta: #16933F;
 
+  /* Accent — gold */
   --gold-600: #B58A3D;
   --gold-500: #C99D52;
   --gold-300: #E2C896;
   --gold-100: #F3E8D0;
 
+  /* Ink (text) */
   --ink-900:  #14201B;
   --ink-700:  #2A3833;
   --ink-500:  #4F5C56;
   --ink-400:  #6E7A74;
   --ink-300:  #97A19B;
 
-  --paper:     #FAF7F2;   /* warm ivory */
+  /* Paper (surface) */
+  --paper:     #FAF7F2;
   --paper-2:   #F4EFE6;
   --paper-3:   #ECE6D8;
   --white:     #FFFFFF;
 
-  --rose-500:  #B5685E;   /* for oncology empathy accents */
+  /* Editorial accent */
+  --rose-500:  #B5685E;
   --rose-100:  #F3E2DC;
 
-  --radius-sm: 6px;
-  --radius:    10px;
-  --radius-lg: 18px;
-  --radius-xl: 28px;
+  /* Radius — pill-first system */
+  --radius-xs:  6px;
+  --radius-sm:  10px;
+  --radius-md:  18px;
+  --radius-lg:  24px;
+  --radius-xl:  28px;
+  --radius-full: 9999px;
+  /* legacy alias kept for backward compatibility */
+  --radius:     10px;
 
+  /* Spacing — 4px base */
+  --space-xxs:   4px;
+  --space-xs:    8px;
+  --space-sm:    12px;
+  --space-md:    16px;
+  --space-base:  20px;
+  --space-lg:    32px;
+  --space-xl:    48px;
+  --space-xxl:   64px;
+  --space-section: 96px;
+
+  /* Shadows — all warm-tinted */
   --shadow-sm: 0 1px 2px rgba(20,32,27,.06), 0 1px 1px rgba(20,32,27,.04);
   --shadow:    0 6px 18px -8px rgba(20,32,27,.18), 0 2px 4px rgba(20,32,27,.05);
   --shadow-lg: 0 24px 48px -20px rgba(20,32,27,.22), 0 4px 10px rgba(20,32,27,.06);
+  --shadow-hover-card: 0 16px 40px -12px rgba(20,32,27,.18);
+  --shadow-hover-lift: 0 24px 48px -16px rgba(20,32,27,.18), 0 4px 12px -4px rgba(20,32,27,.08);
 
+  /* Type families */
   --serif: "Instrument Serif", "Newsreader", Georgia, serif;
   --sans:  "Clear Sans", "Geist", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --mono:  "Geist Mono", ui-monospace, Menlo, monospace;
+
+  /* Easing */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* ── Satoshi test override — Oncology page only ── */
+.oncology-satoshi,
+.oncology-satoshi * {
+  font-family: 'Satoshi-Variable', sans-serif !important;
+}
+.oncology-satoshi .italic-em,
+.oncology-satoshi blockquote,
+.oncology-satoshi [style*="serif"] {
+  font-family: "Instrument Serif", Georgia, serif !important;
 }
 
 * { box-sizing: border-box; }
@@ -127,70 +165,187 @@ a { color: inherit; text-decoration: none; }
   }
 }
 
-/* ====== Buttons ====== */
+/* ====== Buttons ====== Pill-first; every button is rounded-full ====== */
 .btn {
-  display: inline-flex; align-items: center; gap: 8px;
+  display: inline-flex; align-items: center; gap: var(--space-xs);
   padding: 12px 20px;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
+  font-family: var(--sans);
   font-weight: 500;
   font-size: 14px;
   letter-spacing: .01em;
-  transition: all .18s ease;
+  transition: background 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms var(--ease-out);
   white-space: nowrap;
 }
+.btn:active { transform: scale(0.97); }
+
 .btn-primary {
   background: var(--green-cta);
-  color: #FFFFFF;
+  color: var(--white);
 }
 .btn-primary:hover { background: var(--green-800); transform: translateY(-1px); }
+.btn-primary:active { transform: scale(0.97); }
+
+.btn-secondary {
+  background: var(--white);
+  color: var(--ink-700);
+  border: 1px solid rgba(20,32,27,.10);
+}
+.btn-secondary:hover {
+  background: rgba(37,141,72,.06);
+  border-color: rgba(37,141,72,.30);
+  color: var(--green-700);
+}
+
 .btn-ghost {
   background: transparent;
   color: var(--ink-900);
   border: 1px solid rgba(20,32,27,.18);
 }
 .btn-ghost:hover { background: rgba(20,32,27,.04); }
-.btn-light {
-  background: var(--paper);
-  color: var(--green-800);
-  border: 1px solid rgba(20,32,27,.08);
+
+/* Frosted quick-view / shop-now pill — slides up over product imagery (design.md: button-pill-quick-view) */
+.btn-quick-view {
+  background: rgba(255,255,255,.92);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: var(--ink-900);
+  border: 1px solid rgba(20,32,27,.12);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 11px 18px;
 }
-.btn-light:hover { background: var(--white); }
+.btn-quick-view:hover { background: var(--white); }
+
+.btn-outline-white {
+  background: rgba(255,255,255,.10);
+  color: var(--white);
+  border: 1.5px solid rgba(255,255,255,.35);
+  backdrop-filter: blur(6px);
+}
+.btn-outline-white:hover { background: rgba(255,255,255,.18); }
+
+/* White inverse button — solid white CTA for dark / image-backed surfaces */
+.btn-inverse {
+  background: var(--white);
+  color: var(--ink-900);
+}
+.btn-inverse:hover { background: #E8E8E8; }
+
+.btn-icon-circle {
+  width: 44px; height: 44px;
+  padding: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--white);
+  color: var(--ink-700);
+  border: 1px solid rgba(20,32,27,.10);
+  cursor: pointer;
+  transition: background 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms var(--ease-out);
+}
+.btn-icon-circle:hover {
+  background: rgba(37,141,72,.06);
+  border-color: rgba(37,141,72,.30);
+  color: var(--green-700);
+}
+.btn-icon-circle:active { transform: scale(0.97); }
+
 .btn-sm { padding: 8px 14px; font-size: 13px; }
 .btn-lg { padding: 14px 26px; font-size: 15px; }
 
-/* ====== Type ====== */
+/* ====== Type — utility classes mirroring design.md ====== */
 .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
   font-family: var(--sans);
-  font-size: 12.5px;
+  font-size: 13.5px;
   font-weight: 600;
-  letter-spacing: -.005em;
+  letter-spacing: .10em;
+  text-transform: uppercase;
   color: var(--green-700);
+  margin-bottom: var(--space-md);
 }
-.h1 {
+.gold-rule {
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--gold-300);
+  flex-shrink: 0;
+}
+
+.h-display-xl {
   font-family: var(--sans);
   font-weight: 500;
-  font-size: 56px;
-  line-height: 1.04;
+  font-size: clamp(40px, 5.4vw, 68px);
+  line-height: 1.05;
   letter-spacing: -.025em;
   color: var(--ink-900);
+  margin: 0;
 }
-.h2 {
+.h-display-lg {
   font-family: var(--sans);
   font-weight: 500;
-  font-size: 38px;
-  line-height: 1.08;
+  font-size: clamp(32px, 3.5vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -.025em;
+  color: var(--ink-900);
+  margin: 0;
+}
+.h-display-md {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: clamp(26px, 2.6vw, 36px);
+  line-height: 1.15;
   letter-spacing: -.022em;
+  color: var(--ink-900);
+  margin: 0;
 }
-.h3 {
+.h-display-sm {
   font-family: var(--sans);
   font-weight: 500;
-  font-size: 22px;
+  font-size: clamp(22px, 2.2vw, 28px);
   line-height: 1.2;
-  letter-spacing: -.012em;
+  letter-spacing: -.018em;
+  color: var(--ink-900);
+  margin: 0;
 }
-.italic-em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--green-700); letter-spacing: -.005em; }
-.lead { font-size: 17px; line-height: 1.55; color: var(--ink-500); }
+
+/* legacy aliases (kept so older inline classNames still work) */
+.h1 { font-family: var(--sans); font-weight: 500; font-size: 56px; line-height: 1.04; letter-spacing: -.025em; color: var(--ink-900); }
+.h2 { font-family: var(--sans); font-weight: 500; font-size: 38px; line-height: 1.08; letter-spacing: -.022em; }
+.h3 { font-family: var(--sans); font-weight: 500; font-size: 22px; line-height: 1.2;  letter-spacing: -.012em; }
+
+.italic-em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--green-700);
+  letter-spacing: -.005em;
+}
+.lead { font-size: 17px; line-height: 1.6; color: var(--ink-500); }
+.lead-sm { font-size: 16px; line-height: 1.6; color: var(--ink-500); }
 .small { font-size: 13px; color: var(--ink-500); }
+
+/* Vertical gold accent bar before specialty tags / list items */
+.tag-bar {
+  display: inline-block;
+  width: 3px;
+  height: 16px;
+  background: var(--gold-300);
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+/* Tag row: gold bar + label */
+.tag-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 13px;
+  color: var(--ink-700);
+  line-height: 1.3;
+}
 
 
 
@@ -204,16 +359,202 @@ a { color: inherit; text-decoration: none; }
   background: linear-gradient(90deg, transparent, rgba(20,32,27,.12), transparent);
 }
 
-/* ====== Card ====== */
+/* ====== Cards — four archetypes mirroring design.md ====== */
 .card {
   background: var(--white);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   border: 1px solid rgba(20,32,27,.06);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
-  transition: all .2s ease;
+  transition: transform 220ms var(--ease-out), box-shadow 220ms ease;
 }
 .card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+
+/* Editorial cream card — used for "Why us" 4-up grid */
+.card-paper {
+  background: var(--paper-2);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(20,32,27,.05);
+  padding: var(--space-lg) 28px 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Testimonial blockquote card */
+.card-testimonial {
+  background: var(--paper);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(20,32,27,.07);
+  padding: 40px 32px 36px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Specialist card — fixed height, cream */
+.card-specialist {
+  position: relative;
+  background: var(--paper-2);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(20,32,27,.05);
+  height: 260px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 44% 1fr;
+}
+
+/* Product card — white shell, used in Doctor's Recommendations */
+.card-product {
+  position: relative;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(20,32,27,.06);
+  min-height: 460px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(20,32,27,.03);
+  transition: transform 320ms var(--ease-out), box-shadow 320ms var(--ease-out);
+}
+.card-product:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover-lift);
+}
+
+/* Cream radial backdrop for product photos */
+.card-product-bg {
+  position: relative;
+  flex: 1;
+  background: radial-gradient(120% 90% at 35% 25%, #F6EFE2 0%, #ECDFC4 65%, #D9C9A6 100%);
+  padding: var(--space-base) 22px var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Badge pill system ──────────────────────────────────────────
+   Two variants:
+   1. badge-pill-warm   — gold-300 fill — editorial curation (Featured, Bestseller)
+   2. badge-pill-outline — ghost/outline — subtle status (Limited edition, Coming soon)
+   ────────────────────────────────────────────────────────────── */
+.badge-pill-warm,
+.badge-pill-outline {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+/* Variant 1 — editorial (warm gold fill) */
+.badge-pill-warm {
+  background: var(--gold-300);
+  color: var(--green-900);
+}
+
+/* Variant 2 — ghost/outline */
+.badge-pill-outline {
+  background: transparent;
+  color: var(--ink-700);
+  border: 1.5px solid rgba(20,32,27,.22);
+}
+
+/* Glass pill — frosted accreditation badge for hero / dark surfaces.
+   Pairs an icon with an uppercase mono label inside a translucent pill. */
+.badge-glass {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.18);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(200,255,225,1);
+}
+
+/* Hero search bar — rounded white pill with input + Search button.
+   Designed to sit over a dark hero image. */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background: rgba(255,255,255,.92);
+  border-radius: var(--radius-full);
+  padding: 5px 5px 5px 20px;
+  border: 1px solid rgba(255,255,255,.22);
+  box-shadow: 0 16px 40px -12px rgba(0,0,0,.40), 0 2px 6px rgba(0,0,0,.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: box-shadow 220ms var(--ease-out), border-color 220ms ease;
+  max-width: 540px;
+}
+.search-bar:focus-within {
+  box-shadow: 0 0 0 4px rgba(14,92,49,.28), 0 16px 40px -10px rgba(0,0,0,.40);
+  border-color: var(--green-cta);
+}
+.search-bar input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 12px 12px;
+  font-family: var(--sans);
+  font-size: 15px;
+  background: transparent;
+  color: var(--ink-900);
+}
+.search-bar input::placeholder { color: var(--ink-400); }
+
+/* Pill tabs — used by tabbed sections */
+.pill-tab {
+  padding: 9px 20px;
+  border-radius: var(--radius-full);
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 400;
+  cursor: pointer;
+  background: transparent;
+  color: var(--ink-500);
+  border: 1px solid rgba(20,32,27,.10);
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+.pill-tab.is-active {
+  background: var(--white);
+  color: var(--green-800);
+  font-weight: 600;
+  border-color: rgba(37,141,72,.30);
+}
+
+/* "View all" link — green text + arrow, no underline */
+.link-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--green-700);
+  white-space: nowrap;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+.link-view-all svg {
+  transition: transform 200ms cubic-bezier(0.23,1,0.32,1);
+}
+.link-view-all:hover svg {
+  transform: translateX(4px);
+}
 
 /* tag pill */
 .pill {
@@ -255,6 +596,11 @@ a { color: inherit; text-decoration: none; }
   to   { opacity: 1; }
 }
 .fade-in { animation: fadeIn .35s ease both; }
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
 
 @keyframes tryOnEnter {
   from { opacity: 0; transform: scale(0.97); }

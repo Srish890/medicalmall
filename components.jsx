@@ -2,53 +2,56 @@
 
 const { useState, useEffect, useRef, useMemo } = React;
 
-/* ---------- Icons (stroke-only, minimal) ---------- */
+/* ---------- Icons (Lucide via UMD on unpkg) ----------
+   Library: https://github.com/lucide-icons/lucide
+   Old project-local names are aliased to Lucide PascalCase names. */
+const LUCIDE_ALIAS = {
+  "star": "Star", "search": "Search", "eye": "Eye", "cart": "ShoppingCart",
+  "user": "User", "phone": "Phone", "leaf": "Leaf", "shield": "ShieldCheck",
+  "stethoscope": "Stethoscope", "chat": "MessageSquare", "sparkle": "Sparkles",
+  "arrow-left": "ArrowLeft", "arrow-right": "ArrowRight", "arrow-up-right": "ArrowUpRight",
+  "chevron": "ChevronRight", "chevron-down": "ChevronDown",
+  "upload": "Upload", "camera": "Camera", "truck": "Truck", "refresh": "RefreshCw",
+  "heart": "Heart", "play": "Play", "lock": "Lock", "check": "Check", "x": "X",
+  "plus": "Plus", "minus": "Minus", "ribbon": "Ribbon", "pill-icon": "Pill",
+  "hand": "Hand", "scissors": "Scissors", "spa": "Flower2", "droplet": "Droplet",
+  "moon": "Moon", "menu": "Menu", "filter": "Filter", "info": "Info",
+  "compass": "Compass", "calendar": "Calendar", "award": "Award", "hospital": "Hospital",
+};
+
+const lucideNodeToReact = (node, key) => {
+  if (!Array.isArray(node)) return null;
+  const [tag, attrs, children] = node;
+  const reactAttrs = { key, ...attrs };
+  // SVG attribute → React DOM key conversions
+  if (reactAttrs["stroke-width"] !== undefined) { reactAttrs.strokeWidth = reactAttrs["stroke-width"]; delete reactAttrs["stroke-width"]; }
+  if (reactAttrs["stroke-linecap"] !== undefined) { reactAttrs.strokeLinecap = reactAttrs["stroke-linecap"]; delete reactAttrs["stroke-linecap"]; }
+  if (reactAttrs["stroke-linejoin"] !== undefined) { reactAttrs.strokeLinejoin = reactAttrs["stroke-linejoin"]; delete reactAttrs["stroke-linejoin"]; }
+  const kids = (children || []).map((c, i) => lucideNodeToReact(c, i));
+  return React.createElement(tag, reactAttrs, kids.length ? kids : undefined);
+};
+
 const Icon = ({ name, size = 20, stroke = 1.6, color = "currentColor", fill = "none" }) => {
-  const s = { width: size, height: size, fill, stroke: color, strokeWidth: stroke, strokeLinecap: "round", strokeLinejoin: "round" };
-  switch (name) {
-    case "star":return <svg viewBox="0 0 24 24" {...s}><path d="M12 2.5l2.95 6.4 6.55.9-4.75 4.6 1.15 6.6L12 17.85 6.1 21l1.15-6.6L2.5 9.8l6.55-.9z" /></svg>;
-    case "search":return <svg viewBox="0 0 24 24" {...s}><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>;
-    case "eye":return <svg viewBox="0 0 24 24" {...s}><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" /><circle cx="12" cy="12" r="3" /></svg>;
-    case "cart":return <svg viewBox="0 0 24 24" {...s}><path d="M3 4h2l2.4 12.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.5L22 8H6" /><circle cx="9" cy="21" r="1.4" /><circle cx="18" cy="21" r="1.4" /></svg>;
-    case "user":return <svg viewBox="0 0 24 24" {...s}><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0 1 16 0" /></svg>;
-    case "phone":return <svg viewBox="0 0 24 24" {...s}><path d="M5 4h3l2 5-2.5 1.5a12 12 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z" /></svg>;
-    case "leaf":return <svg viewBox="0 0 24 24" {...s}><path d="M5 21c0-9 6-15 15-15 0 9-6 15-15 15Z" /><path d="M5 21c4-4 8-8 12-12" /></svg>;
-    case "shield":return <svg viewBox="0 0 24 24" {...s}><path d="M12 3 4 6v6c0 5 3.5 8.5 8 9 4.5-.5 8-4 8-9V6l-8-3Z" /><path d="m9 12 2 2 4-4" /></svg>;
-    case "stethoscope":return <svg viewBox="0 0 24 24" {...s}><path d="M5 3v6a4 4 0 0 0 8 0V3" /><path d="M9 13v3a5 5 0 0 0 10 0v-2" /><circle cx="19" cy="11" r="2" /></svg>;
-    case "chat":return <svg viewBox="0 0 24 24" {...s}><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-7l-4 3v-3H6a2 2 0 0 1-2-2V6Z" /></svg>;
-    case "sparkle":return <svg viewBox="0 0 24 24" {...s}><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6" /></svg>;
-    case "arrow-left":return <svg viewBox="0 0 24 24" {...s}><path d="M19 12H5M11 18l-6-6 6-6" /></svg>;
-    case "arrow-right":return <svg viewBox="0 0 24 24" {...s}><path d="M5 12h14M13 6l6 6-6 6" /></svg>;
-    case "arrow-up-right":return <svg viewBox="0 0 24 24" {...s}><path d="M7 17 17 7M9 7h8v8" /></svg>;
-    case "chevron":return <svg viewBox="0 0 24 24" {...s}><path d="m9 6 6 6-6 6" /></svg>;
-    case "chevron-down":return <svg viewBox="0 0 24 24" {...s}><path d="m6 9 6 6 6-6" /></svg>;
-    case "upload":return <svg viewBox="0 0 24 24" {...s}><path d="M12 16V4M7 9l5-5 5 5" /><path d="M5 20h14" /></svg>;
-    case "camera":return <svg viewBox="0 0 24 24" {...s}><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>;
-    case "truck":return <svg viewBox="0 0 24 24" {...s}><path d="M3 7h11v10H3zM14 10h4l3 3v4h-7z" /><circle cx="7" cy="18" r="1.6" /><circle cx="17" cy="18" r="1.6" /></svg>;
-    case "refresh":return <svg viewBox="0 0 24 24" {...s}><path d="M3 12a9 9 0 0 1 15.5-6.3L21 8" /><path d="M21 3v5h-5" /><path d="M21 12a9 9 0 0 1-15.5 6.3L3 16" /><path d="M3 21v-5h5" /></svg>;
-    case "heart":return <svg viewBox="0 0 24 24" {...s}><path d="M12 20s-7-4.5-9-9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c-2 4.5-9 9-9 9Z" /></svg>;
-    case "play":return <svg viewBox="0 0 24 24" {...s}><path d="m7 5 12 7-12 7Z" /></svg>;
-    case "lock":return <svg viewBox="0 0 24 24" {...s}><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" /></svg>;
-    case "check":return <svg viewBox="0 0 24 24" {...s}><path d="m5 12 5 5 9-11" /></svg>;
-    case "x":return <svg viewBox="0 0 24 24" {...s}><path d="M6 6l12 12M18 6 6 18" /></svg>;
-    case "plus":return <svg viewBox="0 0 24 24" {...s}><path d="M12 5v14M5 12h14" /></svg>;
-    case "minus":return <svg viewBox="0 0 24 24" {...s}><path d="M5 12h14" /></svg>;
-    case "ribbon":return <svg viewBox="0 0 24 24" {...s}><path d="M9 3 12 9l3-6" /><path d="M9 9c-2 4-2 8 3 12 5-4 5-8 3-12" /></svg>;
-    case "pill-icon":return <svg viewBox="0 0 24 24" {...s}><rect x="3" y="9" width="18" height="6" rx="3" transform="rotate(-30 12 12)" /><path d="M9.5 7.5 16.5 14.5" /></svg>;
-    case "hand":return <svg viewBox="0 0 24 24" {...s}><path d="M9 11V5a1.5 1.5 0 0 1 3 0v5" /><path d="M12 10V4a1.5 1.5 0 0 1 3 0v6" /><path d="M15 10V6a1.5 1.5 0 0 1 3 0v8a6 6 0 0 1-6 6 6 6 0 0 1-6-6v-3a1.5 1.5 0 0 1 3 0" /></svg>;
-    case "scissors":return <svg viewBox="0 0 24 24" {...s}><circle cx="6" cy="6" r="3" /><circle cx="6" cy="18" r="3" /><path d="m9 8 12 10M9 16 21 6" /></svg>;
-    case "spa":return <svg viewBox="0 0 24 24" {...s}><path d="M12 22c-4-2-8-6-8-12 4 0 8 4 8 8M12 22c4-2 8-6 8-12-4 0-8 4-8 8" /></svg>;
-    case "droplet":return <svg viewBox="0 0 24 24" {...s}><path d="M12 3s7 7 7 12a7 7 0 0 1-14 0c0-5 7-12 7-12Z" /></svg>;
-    case "moon":return <svg viewBox="0 0 24 24" {...s}><path d="M20 14A8 8 0 0 1 10 4a8 8 0 1 0 10 10Z" /></svg>;
-    case "menu":return <svg viewBox="0 0 24 24" {...s}><path d="M4 7h16M4 12h16M4 17h16" /></svg>;
-    case "filter":return <svg viewBox="0 0 24 24" {...s}><path d="M4 5h16l-6 8v6l-4-2v-4L4 5Z" /></svg>;
-    case "info":return <svg viewBox="0 0 24 24" {...s}><circle cx="12" cy="12" r="9" /><path d="M12 8h.01M11 12h1v5h1" /></svg>;
-    case "compass":return <svg viewBox="0 0 24 24" {...s}><circle cx="12" cy="12" r="9" /><path d="m9 15 2-6 6-2-2 6-6 2Z" /></svg>;
-    case "calendar":return <svg viewBox="0 0 24 24" {...s}><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 9h18M8 3v4M16 3v4" /></svg>;
-    case "award":return <svg viewBox="0 0 24 24" {...s}><circle cx="12" cy="9" r="6" /><path d="m9 14-2 7 5-3 5 3-2-7" /></svg>;
-    case "hospital":return <svg viewBox="0 0 24 24" {...s}><path d="M3 21h18M5 21V7l7-4 7 4v14" /><path d="M12 9v6M9 12h6" /></svg>;
-    default:return null;
-  }
+  const lucideKey = LUCIDE_ALIAS[name] || name;
+  const iconNode = (typeof window !== "undefined" && window.lucide) ? window.lucide[lucideKey] : null;
+  if (!iconNode) return null;
+  // Lucide UMD shape: ["svg", {defaultAttrs}, [...inner children]]
+  const innerChildren = Array.isArray(iconNode[2]) ? iconNode[2] : [];
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill={fill}
+      stroke={color}
+      strokeWidth={stroke}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      {innerChildren.map((node, i) => lucideNodeToReact(node, i))}
+    </svg>
+  );
 };
 
 /* ---------- Logo ---------- */
@@ -97,13 +100,31 @@ const UtilityBar = () =>
 
 
 /* ---------- Header ---------- */
-const Header = ({ navigate, current, cartCount = 2 }) => {
+const Header = ({ navigate, current, cartCount = 2, forceGlass = false }) => {
   const [catOpen, setCatOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const catRef = useRef(null);
+  const lastY = useRef(0);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
+    const onScroll = () => {
+      const y = window.scrollY;
+      const atTop = y < 80;
+      setScrolled(!atTop);
+      if (atTop) {
+        // back at top — always show in default state
+        setHidden(false);
+      } else if (y > lastY.current + 6) {
+        // scrolling down — hide
+        setHidden(true);
+        setCatOpen(false);
+      } else if (y < lastY.current - 4) {
+        // scrolling up — reveal
+        setHidden(false);
+      }
+      lastY.current = y;
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -131,44 +152,48 @@ const Header = ({ navigate, current, cartCount = 2 }) => {
   ];
 
   /* colours swap based on scroll — white on hero, dark on pill */
-  const textCol  = scrolled ? "var(--ink-900)" : "rgba(255,255,255,.92)";
-  const iconCol  = scrolled ? "var(--ink-700)" : "rgba(255,255,255,.85)";
+  const pill = scrolled;              // pill shape & size — only when truly scrolled
+  const glass = scrolled || forceGlass; // glass bg & ink colours — also on forceGlass pages
+  const textCol  = glass ? "var(--ink-900)" : "rgba(255,255,255,.92)";
+  const iconCol  = glass ? "var(--ink-700)" : "rgba(255,255,255,.85)";
 
   return (
     <header style={{
       position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
-      paddingTop: scrolled ? 12 : 0,
+      paddingTop: pill ? 8 : 0,
       background: "transparent",
       pointerEvents: "none",
-      transition: "padding-top 320ms cubic-bezier(0.23,1,0.32,1)",
+      transform: hidden ? "translateY(-110%)" : "translateY(0)",
+      transition: "transform 320ms cubic-bezier(0.23,1,0.32,1), padding-top 320ms cubic-bezier(0.23,1,0.32,1)",
     }}>
       <div style={{
         display: "flex", alignItems: "center", justifyContent: "space-between",
         /* unscrolled: edge-to-edge generous padding | scrolled: centred pill */
-        padding: scrolled ? "6px 16px" : "20px 56px",
-        maxWidth: scrolled ? 920 : "100%",
+        padding: pill ? "6px 16px" : "20px 56px",
+        maxWidth: pill ? 920 : "100%",
         margin: "0 auto",
-        background: scrolled ? "rgba(255,255,255,.88)" : "transparent",
-        backdropFilter: scrolled ? "blur(22px) saturate(180%)" : "none",
-        WebkitBackdropFilter: scrolled ? "blur(22px) saturate(180%)" : "none",
-        borderRadius: scrolled ? 999 : 0,
-        border: scrolled ? "1px solid rgba(255,255,255,.75)" : "none",
-        boxShadow: scrolled ? "0 4px 24px -4px rgba(20,32,27,.18), 0 1px 6px rgba(20,32,27,.08)" : "none",
+        background: glass ? "rgba(255,255,255,.72)" : "transparent",
+        backdropFilter: glass ? "blur(28px) saturate(160%)" : "none",
+        WebkitBackdropFilter: glass ? "blur(28px) saturate(160%)" : "none",
+        borderRadius: pill ? 999 : 0,
+        border: pill ? "1px solid rgba(255,255,255,.55)" : "none",
+        borderBottom: (!pill && glass) ? "1px solid rgba(20,32,27,.07)" : undefined,
+        boxShadow: glass ? "0 1px 2px rgba(20,32,27,.06), 0 1px 1px rgba(20,32,27,.04)" : "none",
         transition: "all 360ms cubic-bezier(0.23,1,0.32,1)",
         pointerEvents: "auto",
       }}>
 
         {/* Left: logo + nav */}
-        <div style={{ display: "flex", alignItems: "center", gap: scrolled ? 22 : 36, transition: "gap 320ms cubic-bezier(0.23,1,0.32,1)" }}>
-          <div style={{ cursor: "pointer", display: "flex", alignItems: "center", transform: scrolled ? "scale(.72)" : "scale(1)", transformOrigin: "left center", transition: "transform 320ms cubic-bezier(0.23,1,0.32,1)" }} onClick={() => navigate("home")}>
-            <Logo inverse={!scrolled} />
+        <div style={{ display: "flex", alignItems: "center", gap: pill ? 22 : 36, transition: "gap 320ms cubic-bezier(0.23,1,0.32,1)" }}>
+          <div style={{ cursor: "pointer", display: "flex", alignItems: "center", transform: pill ? "scale(.72)" : "scale(1)", transformOrigin: "left center", transition: "transform 320ms cubic-bezier(0.23,1,0.32,1)" }} onClick={() => navigate("home-v2")}>
+            <Logo inverse={!glass} />
           </div>
-          <nav style={{ display: "flex", gap: scrolled ? 24 : 32, transition: "gap 320ms cubic-bezier(0.23,1,0.32,1)" }}>
+          <nav style={{ display: "flex", gap: pill ? 24 : 32, transition: "gap 320ms cubic-bezier(0.23,1,0.32,1)" }}>
             {navItems.map((n) => n.key === "categories" ? (
               <div key="categories" ref={catRef} style={{ position: "relative" }}>
                 <button onClick={() => setCatOpen(o => !o)} style={{
-                  fontSize: scrolled ? 13.5 : 15, color: textCol, fontWeight: 500, padding: "4px 0",
-                  borderBottom: catOpen ? `2px solid ${scrolled ? "var(--green-cta)" : "rgba(255,255,255,.8)"}` : "2px solid transparent",
+                  fontSize: pill ? 13.5 : 15, color: textCol, fontWeight: 500, padding: "4px 0",
+                  borderBottom: catOpen ? `2px solid ${glass ? "var(--green-cta)" : "rgba(255,255,255,.8)"}` : "2px solid transparent",
                   display: "inline-flex", alignItems: "center", gap: 5,
                   transition: "color 320ms ease, font-size 320ms cubic-bezier(0.23,1,0.32,1)",
                 }}>
@@ -187,7 +212,7 @@ const Header = ({ navigate, current, cartCount = 2 }) => {
                     animation: "fadeUp .15s cubic-bezier(0.23,1,0.32,1)",
                   }}>
                     {categories.map(c => (
-                      <button key={c.key} onClick={() => { navigate("oncology"); setCatOpen(false); }}
+                      <button key={c.key} onClick={() => { navigate("oncology-v2"); setCatOpen(false); }}
                         style={{ textAlign: "left", padding: "10px 12px", borderRadius: 10, background: "transparent", cursor: "pointer", transition: "background 150ms ease" }}
                         onMouseEnter={e => e.currentTarget.style.background = "var(--paper-2,#F5F5F2)"}
                         onMouseLeave={e => e.currentTarget.style.background = "transparent"}
@@ -201,8 +226,8 @@ const Header = ({ navigate, current, cartCount = 2 }) => {
               </div>
             ) : (
               <button key={n.key} onClick={() => navigate(n.key)} style={{
-                fontSize: scrolled ? 13.5 : 15, color: textCol, fontWeight: 500, padding: "4px 0",
-                borderBottom: current === n.key ? `2px solid ${scrolled ? "var(--green-cta)" : "rgba(255,255,255,.8)"}` : "2px solid transparent",
+                fontSize: pill ? 13.5 : 15, color: textCol, fontWeight: 500, padding: "4px 0",
+                borderBottom: current === n.key ? `2px solid ${glass ? "var(--green-cta)" : "rgba(255,255,255,.8)"}` : "2px solid transparent",
                 transition: "color 320ms ease, font-size 320ms cubic-bezier(0.23,1,0.32,1)", whiteSpace: "nowrap",
               }}>{n.label}</button>
             ))}
@@ -210,15 +235,60 @@ const Header = ({ navigate, current, cartCount = 2 }) => {
         </div>
 
         {/* Right: actions */}
-        <div style={{ display: "flex", alignItems: "center", gap: scrolled ? 4 : 12, transition: "gap 320ms cubic-bezier(0.23,1,0.32,1)" }}>
-          <button style={{ ...iconBtn, width: scrolled ? 34 : 38, height: scrolled ? 34 : 38, transition: "all 320ms cubic-bezier(0.23,1,0.32,1)" }}>
-            <Icon name="search" size={scrolled ? 18 : 20} color={iconCol} />
+        <div style={{ display: "flex", alignItems: "center", gap: pill ? 4 : 12, transition: "gap 320ms cubic-bezier(0.23,1,0.32,1)" }}>
+
+          {/* Talk to a specialist */}
+          <button
+            onMouseEnter={e => {
+              if (glass) {
+                e.currentTarget.style.background = "rgba(37,141,72,.06)";
+                e.currentTarget.style.borderColor = "rgba(37,141,72,.30)";
+                e.currentTarget.style.color = "var(--green-700)";
+              } else {
+                e.currentTarget.style.background = "rgba(255,255,255,.12)";
+              }
+            }}
+            onMouseLeave={e => {
+              if (glass) {
+                e.currentTarget.style.background = "#fff";
+                e.currentTarget.style.borderColor = "rgba(20,32,27,.12)";
+                e.currentTarget.style.color = "var(--ink-700)";
+              } else {
+                e.currentTarget.style.background = "transparent";
+              }
+            }}
+            style={{
+              display: "inline-flex", alignItems: "center", gap: 6,
+              padding: pill ? "7px 16px" : "8px 18px",
+              borderRadius: 9999,
+              fontSize: pill ? 13 : 14,
+              fontWeight: 500,
+              fontFamily: "var(--sans)",
+              whiteSpace: "nowrap",
+              cursor: "pointer",
+              letterSpacing: ".005em",
+              transition: "all 320ms cubic-bezier(0.23,1,0.32,1)",
+              /* dark surface (unscrolled): btn-outline-white — frosted pill from design system */
+              /* glass surface (scrolled/forceGlass): secondary — white fill, neutral border */
+              background: glass ? "#fff" : "rgba(255,255,255,.10)",
+              color: glass ? "var(--ink-700)" : "rgba(255,255,255,.92)",
+              border: glass ? "1px solid rgba(20,32,27,.12)" : "1.5px solid rgba(255,255,255,.35)",
+              backdropFilter: glass ? "none" : "blur(6px)",
+              WebkitBackdropFilter: glass ? "none" : "blur(6px)",
+            }}
+          >
+            <Icon name="MessageSquare" size={pill ? 14 : 15} color="currentColor" stroke={1.8} />
+            Talk to a specialist
           </button>
-          <button style={{ ...iconBtn, width: scrolled ? 34 : 38, height: scrolled ? 34 : 38, transition: "all 320ms cubic-bezier(0.23,1,0.32,1)" }}>
-            <Icon name="user" size={scrolled ? 18 : 20} color={iconCol} />
+
+          <button style={{ ...iconBtn, width: pill ? 34 : 38, height: pill ? 34 : 38, transition: "all 320ms cubic-bezier(0.23,1,0.32,1)" }}>
+            <Icon name="search" size={pill ? 18 : 20} color={iconCol} />
           </button>
-          <button style={{ ...iconBtn, position: "relative", width: scrolled ? 34 : 38, height: scrolled ? 34 : 38, transition: "all 320ms cubic-bezier(0.23,1,0.32,1)" }} title="Cart">
-            <Icon name="cart" size={scrolled ? 18 : 20} color={iconCol} />
+          <button style={{ ...iconBtn, width: pill ? 34 : 38, height: pill ? 34 : 38, transition: "all 320ms cubic-bezier(0.23,1,0.32,1)" }}>
+            <Icon name="user" size={pill ? 18 : 20} color={iconCol} />
+          </button>
+          <button style={{ ...iconBtn, position: "relative", width: pill ? 34 : 38, height: pill ? 34 : 38, transition: "all 320ms cubic-bezier(0.23,1,0.32,1)" }} title="Cart">
+            <Icon name="cart" size={pill ? 18 : 20} color={iconCol} />
             {cartCount > 0 && <span style={cartBadge}>{cartCount}</span>}
           </button>
         </div>
@@ -251,7 +321,7 @@ const cartBadge = {
 /* ---------- Footer ---------- */
 const Footer = ({ lightBg = false } = {}) =>
 <div style={{
-  background: lightBg ? "#fff" : "linear-gradient(to bottom, #000 0%, #0a0a0a 60%, #111 100%)",
+  background: lightBg ? "var(--paper)" : "linear-gradient(to bottom, #000 0%, #0a0a0a 60%, #111 100%)",
   padding: lightBg ? "80px 0 32px" : "0 0 32px",
 }}>
 <footer style={{ background: "#0E2A20", color: "rgba(255,255,255,.7)", padding: "64px 48px 32px", margin: "0 24px", borderRadius: "28px", position: "relative", zIndex: 2, boxShadow: lightBg ? "0 -8px 28px -12px rgba(20,32,27,.18)" : "0 -24px 60px -20px rgba(0,0,0,.5)" }}>
@@ -416,4 +486,145 @@ const CareAssistant = ({ open, setOpen }) => {
 };
 function var_radius_lg() {return "18px";}
 
-Object.assign(window, { Icon, Logo, Header, Footer, UtilityBar, CareAssistant, Img });
+/* ---------- TrustPill — frosted accreditation badge for hero / dark surfaces ---------- */
+const TrustPill = ({ icon = "shield", iconColor = "rgba(110,230,160,1)", children }) =>
+  <div className="badge-glass">
+    {icon && <Icon name={icon} size={13} color={iconColor} />}
+    <span>{children}</span>
+  </div>;
+
+/* ---------- SearchBar — hero search pill ---------- */
+const SearchBar = ({
+  placeholder = "Search medicines, wigs, devices…",
+  buttonLabel = "Search",
+  onSubmit,
+}) => {
+  const [value, setValue] = React.useState("");
+  const submit = (e) => { e.preventDefault(); onSubmit && onSubmit(value); };
+  return (
+    <form className="search-bar" onSubmit={submit}>
+      <Icon name="search" size={18} color="var(--ink-400)" />
+      <input
+        value={value}
+        onChange={e => setValue(e.target.value)}
+        placeholder={placeholder}
+        aria-label={placeholder}
+      />
+      <button type="submit" className="btn btn-primary" style={{ padding: "11px 22px" }}>
+        {buttonLabel}
+      </button>
+    </form>
+  );
+};
+
+/* ---------- ProductCard — the global product-card component (design.md: card-product) ----------
+   Used in every product grid: Home V2 / Oncology V2 recommendations, the PLP, and the storybook.
+   Optional fields (hoverImage, badge, brand, meta, rating, oldPrice) render only when supplied. */
+const ProductCard = ({
+  image, hoverImage, title, length, price, oldPrice, off = 0,
+  badge, brand, meta, rating, reviews,
+  outOfStock = false, onClick, onQuickView,
+}) => {
+  const [hovered, setHovered] = React.useState(false);
+
+  /* Image badge — editorial labels only (Featured, Bestseller, Popular, New).
+     Promotional / discount text ("% OFF", "Sale") is NEVER shown as an image overlay;
+     it appears inline next to the price instead. */
+  const isEditorial = badge && /featured|bestseller|popular|new arrival|new/i.test(badge);
+
+  /* Auto-compute discount % when off prop is 0 or omitted.
+     Works with both raw numbers (4800) and formatted strings ("₹4,800"). */
+  const _strip = v => parseFloat(String(v).replace(/[^0-9.]/g, '')) || 0;
+  const computedOff = off > 0 ? off : (() => {
+    const p = _strip(price), op = _strip(oldPrice);
+    return (p && op && op > p) ? Math.round((1 - p / op) * 100) : 0;
+  })();
+
+  return (
+    <div
+      className="card-product"
+      onClick={onClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div className="card-product-bg">
+        {isEditorial && (
+          <span className="badge-pill-warm" style={{ position: "relative", zIndex: 3, alignSelf: "flex-start" }}>
+            {badge}
+          </span>
+        )}
+        {outOfStock && (
+          <div aria-hidden style={{ position: "absolute", inset: 0, background: "rgba(255,255,255,.6)", zIndex: 3, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <span style={{ background: "var(--ink-900)", color: "var(--white)", fontSize: 11.5, padding: "5px 14px", borderRadius: "var(--radius-full)", fontWeight: 600, letterSpacing: ".05em" }}>OUT OF STOCK</span>
+          </div>
+        )}
+        {hoverImage && (
+          <img
+            src={hoverImage} alt="" aria-hidden
+            style={{
+              position: "absolute", inset: 0, width: "100%", height: "100%",
+              objectFit: "cover", display: "block",
+              opacity: hovered ? 1 : 0,
+              transform: hovered ? "scale(1)" : "scale(1.04)",
+              transition: "opacity 360ms var(--ease-out), transform 600ms var(--ease-out)",
+              zIndex: 1, pointerEvents: "none",
+            }}
+          />
+        )}
+        <img
+          src={image} alt={title}
+          style={{
+            position: "absolute", inset: 0, width: "100%", height: "100%",
+            objectFit: "cover", display: "block", zIndex: 0,
+            opacity: hoverImage && hovered ? 0 : 1,
+            transition: "opacity 280ms ease",
+          }}
+        />
+        <div style={{ flex: 1 }} />
+        <div style={{
+          position: "absolute", bottom: 0, left: 0, right: 0, padding: "var(--space-sm)",
+          transform: hovered ? "translateY(0)" : "translateY(110%)",
+          transition: "transform 260ms var(--ease-out)",
+          zIndex: 4, pointerEvents: hovered ? "auto" : "none",
+        }}>
+          <button
+            className="btn btn-quick-view"
+            style={{ width: "100%", justifyContent: "center" }}
+            onClick={(e) => { e.stopPropagation(); onQuickView && onQuickView(); }}
+          >
+            <Icon name="eye" size={14} color="var(--ink-900)" /> Quick view
+          </button>
+        </div>
+      </div>
+      <div style={{ background: "var(--white)", padding: "var(--space-md) var(--space-base) var(--space-base)" }}>
+        {brand && (
+          <div style={{ fontSize: 11.5, fontWeight: 600, color: "var(--ink-400)", textTransform: "uppercase", letterSpacing: ".05em", marginBottom: "var(--space-xxs)" }}>
+            {brand}
+          </div>
+        )}
+        <div style={{ fontSize: 15, fontWeight: 500, color: "var(--ink-900)", letterSpacing: "-.008em", lineHeight: 1.35, marginBottom: "var(--space-xxs)" }}>
+          {title}{length ? ` ${length}` : ""}
+        </div>
+        {rating != null && (
+          <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: "var(--space-xs)" }}>
+            <Icon name="star" size={14} color="var(--gold-600)" fill="var(--gold-600)" />
+            <span style={{ fontSize: 13, fontWeight: 600, color: "var(--ink-900)" }}>{rating}</span>
+            {reviews != null && <span style={{ fontSize: 13, color: "var(--ink-400)" }}>({reviews})</span>}
+          </div>
+        )}
+        {meta && (
+          <div style={{ fontSize: 11.5, color: "var(--ink-500)", fontFamily: "var(--mono)", letterSpacing: ".03em", textTransform: "uppercase", marginBottom: "var(--space-xs)" }}>
+            {meta}
+          </div>
+        )}
+        <div style={{ display: "flex", alignItems: "baseline", gap: "var(--space-xs)", flexWrap: "wrap" }}>
+          <span style={{ fontSize: 17, fontWeight: 600, color: "var(--ink-900)" }}>{price}</span>
+          {oldPrice && <span style={{ fontSize: 13, color: "var(--ink-400)", textDecoration: "line-through" }}>{oldPrice}</span>}
+          {computedOff > 0 && <span style={{ fontSize: 12.5, fontWeight: 600, color: "var(--green-cta)" }}>{computedOff}% OFF</span>}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+Object.assign(window, { Icon, Logo, Header, Footer, UtilityBar, CareAssistant, Img, TrustPill, SearchBar, ProductCard });

@@ -33,7 +33,7 @@ const Wigs = ({ navigate }) => {
       head2: "instantly",
       sub: "Add dimensional colour and effortless depth without commitment.",
       cta: "Shop all",
-      action: () => navigate("oncology"),
+      action: () => navigate("oncology-v2"),
       images: ["images/image.png"],
     },
     {
@@ -42,7 +42,7 @@ const Wigs = ({ navigate }) => {
       head2: "premium fits",
       sub: "Custom human-hair wig bundles, hand-tied and individually fitted.",
       cta: "Shop the sale",
-      action: () => navigate("oncology"),
+      action: () => navigate("oncology-v2"),
       images: ["images/phone.avif"],
     },
     {
@@ -51,7 +51,7 @@ const Wigs = ({ navigate }) => {
       head2: "with care",
       sub: "Every wig is hand-tied and individually fit by certified stylists.",
       cta: "Book a free fitting",
-      action: () => navigate("home"),
+      action: () => navigate("home-v2"),
       images: ["https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=800&q=85"],
     },
   ];
@@ -69,14 +69,14 @@ const Wigs = ({ navigate }) => {
       desc: "Hand-tied, lace-front and full-cap human-hair wigs in every length and texture.",
       img: "images/wig-pdp.webp",
       bg: "#3A2E2A",
-      action: () => { window.__plpInitialFilter = { categories: ["women"] }; navigate("oncology-plp"); },
+      action: () => { window.__plpInitialFilter = { categories: ["women"] }; navigate("oncology-plp-v2"); },
     },
     {
       label: "For Men",
       desc: "Discreet hairpieces and natural-looking systems, fitted and styled to suit you.",
       img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=1100&q=70",
       bg: "#243D2F",
-      action: () => { window.__plpInitialFilter = { categories: ["men"] }; navigate("oncology-plp"); },
+      action: () => { window.__plpInitialFilter = { categories: ["men"] }; navigate("oncology-plp-v2"); },
     },
   ];
 
@@ -123,9 +123,9 @@ const Wigs = ({ navigate }) => {
         {/* Breadcrumb — stays inside shell so it aligns with rest of page */}
         <div className="shell">
           <div style={{ padding: "20px 0 16px", display: "flex", alignItems: "center", gap: 8, fontSize: 12.5, color: "var(--ink-500)" }}>
-            <button onClick={() => navigate("home")} style={{ color: "var(--ink-500)" }}>Home</button>
+            <button onClick={() => navigate("home-v2")} style={{ color: "var(--ink-500)" }}>Home</button>
             <Icon name="chevron" size={10} color="var(--ink-400)"/>
-            <button onClick={() => navigate("oncology")} style={{ color: "var(--ink-500)" }}>Oncology</button>
+            <button onClick={() => navigate("oncology-v2")} style={{ color: "var(--ink-500)" }}>Oncology</button>
             <Icon name="chevron" size={10} color="var(--ink-400)"/>
             <span style={{ color: "var(--ink-900)" }}>Human Hair Wigs</span>
           </div>
@@ -254,7 +254,7 @@ const Wigs = ({ navigate }) => {
             <button
               onClick={() => {
                 window.__plpInitialFilter = { categories: [productTab] };
-                navigate("oncology-plp");
+                navigate("oncology-plp-v2");
               }}
               onMouseEnter={e => { e.currentTarget.style.gap = "10px"; }}
               onMouseLeave={e => { e.currentTarget.style.gap = "8px"; }}
