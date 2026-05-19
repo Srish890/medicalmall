@@ -627,4 +627,36 @@ const ProductCard = ({
   );
 };
 
-Object.assign(window, { Icon, Logo, Header, Footer, UtilityBar, CareAssistant, Img, TrustPill, SearchBar, ProductCard });
+/* ---------- FilterSection — collapsible filter group (PLP sidebar) ---------- */
+const FilterSection = ({ title, children, defaultOpen = true }) => {
+  const [open, setOpen] = React.useState(defaultOpen);
+  return (
+    <div style={{ borderBottom: "1px solid rgba(20,32,27,.08)", padding: "var(--space-md) 0" }}>
+      <button onClick={() => setOpen(!open)} style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 14, fontWeight: 600, letterSpacing: "-.005em", color: "var(--ink-900)" }}>
+        {title}
+        <span style={{ display: "inline-flex", transform: open ? "rotate(90deg)" : "none", transition: "transform 200ms var(--ease-out)", color: "var(--ink-400)" }}>
+          <Icon name="chevron" size={14} />
+        </span>
+      </button>
+      {open && <div style={{ marginTop: "var(--space-sm)" }}>{children}</div>}
+    </div>
+  );
+};
+
+/* ---------- FilterCheck — checkbox row used inside FilterSection ---------- */
+const FilterCheck = ({ checked, onChange, label }) => (
+  <label style={{ display: "flex", alignItems: "flex-start", gap: "var(--space-xs)", padding: "6px 0", cursor: "pointer" }}>
+    <span style={{
+      width: 16, height: 16, borderRadius: "var(--radius-xs)", marginTop: 2,
+      border: `1.5px solid ${checked ? "var(--green-cta)" : "rgba(20,32,27,.25)"}`,
+      background: checked ? "var(--green-cta)" : "transparent",
+      display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
+    }}>
+      {checked && <Icon name="check" size={11} color="var(--white)" />}
+    </span>
+    <input type="checkbox" checked={checked} onChange={onChange} style={{ display: "none" }} />
+    <div style={{ fontSize: 13.5, color: "var(--ink-700)", lineHeight: 1.3 }}>{label}</div>
+  </label>
+);
+
+Object.assign(window, { Icon, Logo, Header, Footer, UtilityBar, CareAssistant, Img, TrustPill, SearchBar, ProductCard, FilterSection, FilterCheck });

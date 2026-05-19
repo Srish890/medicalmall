@@ -14,25 +14,28 @@ const OncologyV2 = ({ navigate }) => {
 
   const productsByTab = {
     wigs: [
-      { img: "images/wigs/plpwig.png", hoverImg: "images/wavy.webp", title: "Adira premium topper",     price: "₹4,800", old: "₹6,200", badge: "Featured" },
-      { img: "images/wigs/96b2e5b9-0803-40a8-8252-d3adc67524a9.png",  title: "Wavy lace-front",          price: "₹3,400", length: 'long' },
-      { img: "images/wigs/ce685f55-6a60-4357-9e06-f6ac359149ca.png",  title: "Clip-in fringe topper",    price: "₹4,100", badge: "New" },
-      { img: "images/wigs/plpwig.png",                                title: "Soft bob",                 price: "₹5,200", length: 'natural black' },
+      { img: "images/wigs/plpwig.png",                                 hoverImg: "images/wavy.webp",           brand: "Adira", title: "Adira premium topper",     price: "₹4,800", old: "₹6,200", badge: "Featured", rating: 4.8, reviews: 312, meta: "straight · lace front" },
+      { img: "images/wigs/96b2e5b9-0803-40a8-8252-d3adc67524a9.png",  hoverImg: "images/wig-pdp.webp",         brand: "Adira", title: "Wavy lace-front",          price: "₹3,400", length: "long",           rating: 4.6, reviews: 98,  meta: "wavy · lace front" },
+      { img: "images/wigs/ce685f55-6a60-4357-9e06-f6ac359149ca.png",  hoverImg: "images/Straight.jpg.webp",    brand: "Adira", title: "Clip-in fringe topper",    price: "₹4,100", badge: "New",             rating: 4.7, reviews: 54,  meta: "straight · clip-in" },
+      { img: "images/wigs/plpwig.png",                                 hoverImg: "images/hair blonde 1.png",   brand: "Adira", title: "Soft bob",                 price: "₹5,200", length: "natural black",  rating: 4.9, reviews: 187, meta: "straight · full cap" },
     ],
     bras: [
-      { img: "images/bra.jpg",   title: "Soft-cup post-mastectomy bra",  price: "₹2,150", old: "₹2,800", badge: "Featured" },
-      { img: "images/bra 2.jpg", title: "Wire-free cotton everyday bra", price: "₹1,890" },
-      { img: "images/11485.jpg", title: "Pocket bra with form insert",   price: "₹2,640", badge: "New" },
+      { img: "images/bra.jpg",   hoverImg: "images/bra 2.jpg",  brand: "Medical Mall", title: "Soft-cup post-mastectomy bra",  price: "₹2,150", old: "₹2,800", badge: "Featured", rating: 4.8, reviews: 224, meta: "wire-free · front closure" },
+      { img: "images/bra 2.jpg", hoverImg: "images/bra.jpg",    brand: "Medical Mall", title: "Wire-free cotton everyday bra", price: "₹1,890",                                  rating: 4.6, reviews: 89,  meta: "cotton · adjustable straps" },
+      { img: "images/11485.jpg", hoverImg: "images/bra.jpg",    brand: "Medical Mall", title: "Pocket bra with form insert",   price: "₹2,640", badge: "New",                   rating: 4.7, reviews: 43,  meta: "with drain pockets" },
+      { img: "images/bra.jpg",   hoverImg: "images/bra 2.jpg",  brand: "Medical Mall", title: "Front-close camisole bra",      price: "₹1,490", old: "₹1,800",                  rating: 4.5, reviews: 61,  meta: "modal · drain loops" },
     ],
     forms: [
-      { img: "images/SPRING-SALE-DESKTOP-BLOCK-breast-form.png", title: "Silicone breast form", price: "₹5,400", old: "₹6,800", badge: "Featured", length: "skin-matched" },
-      { img: "images/11485.jpg", title: "Lightweight foam form",  price: "₹2,200" },
-      { img: "images/bra.jpg",   title: "Adhesive partial form",  price: "₹3,100", badge: "New" },
+      { img: "images/SPRING-SALE-DESKTOP-BLOCK-breast-form.png", hoverImg: "images/11485.jpg",                                  brand: "Medical Mall", title: "Silicone breast form",     price: "₹5,400", old: "₹6,800", badge: "Featured", length: "skin-matched", rating: 4.9, reviews: 156, meta: "silicone · weighted" },
+      { img: "images/11485.jpg",                                  hoverImg: "images/SPRING-SALE-DESKTOP-BLOCK-breast-form.png", brand: "Medical Mall", title: "Lightweight foam form",    price: "₹2,200",                                                          rating: 4.5, reviews: 67,  meta: "foam · ultra-light" },
+      { img: "images/bra.jpg",                                    hoverImg: "images/11485.jpg",                                  brand: "Medical Mall", title: "Adhesive partial form",   price: "₹3,100", badge: "New",                                            rating: 4.6, reviews: 38,  meta: "self-adhesive · partial" },
+      { img: "images/11485.jpg",                                  hoverImg: "images/bra.jpg",                                   brand: "Medical Mall", title: "Triangle asymmetric form", price: "₹4,200", old: "₹5,100",                                          rating: 4.7, reviews: 28,  meta: "silicone · triangle cut" },
     ],
     swim: [
-      { img: "images/SPRING-SALE-DESKTOP-BLOCK-breast-form.png", title: "Aqua-safe swim prosthesis",     price: "₹4,200", old: "₹5,400", badge: "Featured" },
-      { img: "images/bra 2.jpg", title: "Quick-dry mastectomy swimsuit", price: "₹3,150" },
-      { img: "images/11485.jpg", title: "Chlorine-resistant pocket top", price: "₹2,890" },
+      { img: "images/SPRING-SALE-DESKTOP-BLOCK-breast-form.png", hoverImg: "images/bra 2.jpg",                                  brand: "Medical Mall", title: "Aqua-safe swim prosthesis",     price: "₹4,200", old: "₹5,400", badge: "Featured", rating: 4.8, reviews: 91, meta: "chlorine-resistant · quick-dry" },
+      { img: "images/bra 2.jpg",                                  hoverImg: "images/SPRING-SALE-DESKTOP-BLOCK-breast-form.png", brand: "Medical Mall", title: "Quick-dry mastectomy swimsuit", price: "₹3,150",                                  rating: 4.5, reviews: 44, meta: "quick-dry · UPF 50+" },
+      { img: "images/11485.jpg",                                  hoverImg: "images/bra 2.jpg",                                  brand: "Medical Mall", title: "Chlorine-resistant pocket top", price: "₹2,890",                                  rating: 4.4, reviews: 29, meta: "pocket · chlorine-safe" },
+      { img: "images/bra.jpg",                                    hoverImg: "images/11485.jpg",                                  brand: "Medical Mall", title: "Swim prosthesis cover",         price: "₹890",  old: "₹1,100", badge: "New",   rating: 4.6, reviews: 17, meta: "UV-safe · easy-close" },
     ],
   };
 
@@ -228,17 +231,21 @@ const OncologyV2 = ({ navigate }) => {
           {(() => {
             const items = productsByTab[oncoTab] || [];
             return (
-              <div style={{ display: "grid", gridTemplateColumns: `repeat(${items.length}, 1fr)`, gap: "var(--space-md)" }}>
+              <div style={{ display: "grid", gridTemplateColumns: `repeat(${Math.min(items.length, 4)}, 1fr)`, gap: "var(--space-md)" }}>
                 {items.map((p, i) => (
                   <ProductCard
                     key={`${oncoTab}-${i}`}
                     image={p.img}
                     hoverImage={p.hoverImg}
+                    brand={p.brand}
                     title={p.title}
+                    length={p.length}
+                    meta={p.meta}
                     price={p.price}
                     oldPrice={p.old}
                     badge={p.badge}
-                    length={p.length}
+                    rating={p.rating}
+                    reviews={p.reviews}
                     onClick={() => navigate("pdp-v2")}
                   />
                 ))}

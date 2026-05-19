@@ -59,35 +59,40 @@ const HomepageV2 = ({ navigate }) => {
 
   const productsByTab = {
     oncology: [
-      { img: "images/wigs/plpwig.png", hoverImg: "images/wavy.webp",          title: "Adira premium wig",             price: "₹4,800", old: "₹6,200", badge: "Featured", length: '16"' },
-      { img: "images/skincare.png",    hoverImg: "images/happy patient.avif", title: "Onco-safe barrier cream",       price: "₹890" },
-      { img: "images/elbow.png",       hoverImg: "images/physio main.avif",   title: "Compression sleeve", price: "₹2,150", length: "grade II" },
-      { img: "images/11485.jpg",       hoverImg: "images/happy patient.avif", title: "Silicone breast form",          price: "₹3,900", badge: "New" },
+      { img: "images/wigs/plpwig.png", hoverImg: "images/wavy.webp",          brand: "Adira",        title: "Adira premium wig",        price: "₹4,800", old: "₹6,200", badge: "Featured", length: '16"',       rating: 4.8, reviews: 312, meta: "straight · lace front" },
+      { img: "images/skincare.png",    hoverImg: "images/happy patient.avif", brand: "Medical Mall", title: "Onco-safe barrier cream",  price: "₹890",                                                          rating: 4.6, reviews: 74,  meta: "dermatologist-tested" },
+      { img: "images/elbow.png",       hoverImg: "images/physio main.avif",   brand: "Medical Mall", title: "Compression sleeve",       price: "₹2,150",                              length: "grade II",        rating: 4.5, reviews: 51,  meta: "lymphoedema · graduated" },
+      { img: "images/11485.jpg",       hoverImg: "images/happy patient.avif", brand: "Medical Mall", title: "Silicone breast form",     price: "₹3,900",               badge: "New",                           rating: 4.7, reviews: 39,  meta: "silicone · weighted" },
     ],
     mother: [
-      { img: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=600&q=70",   title: "Pregnancy multivitamin", price: "₹720", badge: "Featured", length: "60 tabs" },
-      { img: "https://images.unsplash.com/photo-1519689680058-324335c77eba?w=600&q=70", title: "Stretch mark oil",         price: "₹540", length: "100ml" },
-      { img: "https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=600&q=70", title: "Postpartum belly belt",            price: "₹980", badge: "Bestseller" },
+      { img: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=600&q=70",   hoverImg: "https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=600&q=70", brand: "Medical Mall", title: "Pregnancy multivitamin", price: "₹720",  old: "₹920",  badge: "Featured",   length: "60 tabs", rating: 4.7, reviews: 183, meta: "iron · folate · DHA" },
+      { img: "https://images.unsplash.com/photo-1519689680058-324335c77eba?w=600&q=70", hoverImg: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=600&q=70",   brand: "Medical Mall", title: "Stretch mark oil",       price: "₹540",                               length: "100ml",   rating: 4.5, reviews: 92,  meta: "shea · rosehip · jojoba" },
+      { img: "https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=600&q=70", hoverImg: "https://images.unsplash.com/photo-1519689680058-324335c77eba?w=600&q=70", brand: "Medical Mall", title: "Postpartum belly belt",  price: "₹980",                 badge: "Bestseller",               rating: 4.8, reviews: 267, meta: "adjustable · breathable" },
+      { img: "https://images.unsplash.com/photo-1611601322175-ef8ec8c85f01?w=600&q=70", hoverImg: "https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=600&q=70", brand: "Medical Mall", title: "Nursing support pillow", price: "₹1,290", old: "₹1,600",                            rating: 4.6, reviews: 142, meta: "memory foam · washable" },
     ],
     physio: [
-      { img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=70", title: "Post-surgery walker",      price: "₹3,400", badge: "Featured" },
-      { img: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600&q=70",    title: "Heat & cold therapy pack", price: "₹510" },
-      { img: "https://images.unsplash.com/photo-1571019613540-996a69725a78?w=600&q=70", title: "Knee support brace",       price: "₹890" },
+      { img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=70", hoverImg: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600&q=70",    brand: "Medical Mall", title: "Post-surgery walker",      price: "₹3,400", old: "₹4,200", badge: "Featured", rating: 4.6, reviews: 104, meta: "foldable · height-adjustable" },
+      { img: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600&q=70",    hoverImg: "https://images.unsplash.com/photo-1571019613540-996a69725a78?w=600&q=70", brand: "Medical Mall", title: "Heat & cold therapy pack", price: "₹510",                                             rating: 4.4, reviews: 58,  meta: "reusable · dual-sided" },
+      { img: "https://images.unsplash.com/photo-1571019613540-996a69725a78?w=600&q=70", hoverImg: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=70", brand: "Medical Mall", title: "Knee support brace",       price: "₹890",                                             rating: 4.5, reviews: 76,  meta: "neoprene · open patella" },
+      { img: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600&q=70",    hoverImg: "https://images.unsplash.com/photo-1571019613540-996a69725a78?w=600&q=70", brand: "Medical Mall", title: "TENS pain relief unit",    price: "₹2,100", old: "₹2,600", badge: "New",      rating: 4.7, reviews: 61,  meta: "wireless · 20 modes" },
     ],
     cardiac: [
-      { img: "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=600&q=70", title: "BP monitor — automatic",     price: "₹2,180", old: "₹2,800", badge: "Featured" },
-      { img: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=70", title: "Pulse oximeter — fingertip", price: "₹1,490" },
-      { img: "https://images.unsplash.com/photo-1550572017-edd951b55104?w=600&q=70",    title: "Omega-3 capsules",   price: "₹890", length: "60 ct" },
+      { img: "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=600&q=70", hoverImg: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=70", brand: "Medical Mall", title: "BP monitor — automatic",     price: "₹2,180", old: "₹2,800", badge: "Featured", rating: 4.7, reviews: 341, meta: "upper arm · WHO validated" },
+      { img: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=70", hoverImg: "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=600&q=70", brand: "Medical Mall", title: "Pulse oximeter — fingertip", price: "₹1,490",                                           rating: 4.6, reviews: 198, meta: "SpO2 · pulse rate" },
+      { img: "https://images.unsplash.com/photo-1550572017-edd951b55104?w=600&q=70",    hoverImg: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=70", brand: "Medical Mall", title: "Omega-3 capsules",           price: "₹890",                 length: "60 ct",  rating: 4.5, reviews: 87,  meta: "fish oil · 1000mg" },
+      { img: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=70", hoverImg: "https://images.unsplash.com/photo-1550572017-edd951b55104?w=600&q=70",    brand: "Medical Mall", title: "Digital ECG monitor",        price: "₹3,490", old: "₹4,200", badge: "New",      rating: 4.8, reviews: 53,  meta: "single-lead · portable" },
     ],
     diabetes: [
-      { img: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=70", title: "Glucose monitor + 50 strips", price: "₹1,449", old: "₹1,890", badge: "Featured" },
-      { img: "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=600&q=70", title: "Diabetic socks",  price: "₹540", length: "pack of 3" },
-      { img: "https://images.unsplash.com/photo-1550572017-edd951b55104?w=600&q=70",    title: "Sugar-free protein mix",      price: "₹1,290" },
+      { img: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=70", hoverImg: "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=600&q=70", brand: "Medical Mall", title: "Glucose monitor + strips", price: "₹1,449", old: "₹1,890", badge: "Featured", rating: 4.8, reviews: 412, meta: "no-code · 5s result" },
+      { img: "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=600&q=70", hoverImg: "https://images.unsplash.com/photo-1550572017-edd951b55104?w=600&q=70",    brand: "Medical Mall", title: "Diabetic socks",           price: "₹540",                 length: "pack of 3", rating: 4.5, reviews: 63,  meta: "non-binding · moisture-wicking" },
+      { img: "https://images.unsplash.com/photo-1550572017-edd951b55104?w=600&q=70",    hoverImg: "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=600&q=70", brand: "Medical Mall", title: "Sugar-free protein mix",   price: "₹1,290",                                           rating: 4.4, reviews: 49,  meta: "whey · 20g protein" },
+      { img: "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=600&q=70", hoverImg: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=70", brand: "Medical Mall", title: "Insulin cooling pouch",    price: "₹680",                 badge: "New",        rating: 4.6, reviews: 34,  meta: "48h cooling · portable" },
     ],
     wellness: [
-      { img: "https://images.unsplash.com/photo-1556228852-80b6e5eeff06?w=600&q=70",    title: "Daily multivitamin", price: "₹540", old: "₹720", badge: "Featured", length: "60 ct" },
-      { img: "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=600&q=70", title: "Plant protein",    price: "₹1,890", length: "neutral" },
-      { img: "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=600&q=70", title: "Calming aroma roll-on",      price: "₹380" },
+      { img: "https://images.unsplash.com/photo-1556228852-80b6e5eeff06?w=600&q=70",    hoverImg: "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=600&q=70", brand: "Medical Mall", title: "Daily multivitamin",    price: "₹540", old: "₹720", badge: "Featured", length: "60 ct",  rating: 4.6, reviews: 221, meta: "23 nutrients · no fillers" },
+      { img: "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=600&q=70", hoverImg: "https://images.unsplash.com/photo-1556228852-80b6e5eeff06?w=600&q=70",    brand: "Medical Mall", title: "Plant protein",          price: "₹1,890",              length: "neutral",  rating: 4.5, reviews: 88,  meta: "pea · rice · 22g protein" },
+      { img: "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=600&q=70", hoverImg: "https://images.unsplash.com/photo-1556228852-80b6e5eeff06?w=600&q=70",    brand: "Medical Mall", title: "Calming aroma roll-on",  price: "₹380",                                             rating: 4.7, reviews: 134, meta: "lavender · roll-on · 10ml" },
+      { img: "https://images.unsplash.com/photo-1550572017-edd951b55104?w=600&q=70",    hoverImg: "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=600&q=70", brand: "Medical Mall", title: "Magnesium sleep gummies", price: "₹490", old: "₹620",                length: "30 ct",  rating: 4.8, reviews: 198, meta: "glycinate · melatonin-free" },
     ],
   };
 
@@ -373,11 +378,15 @@ const HomepageV2 = ({ navigate }) => {
                     key={`${activeTab}-${i}`}
                     image={p.img}
                     hoverImage={p.hoverImg}
+                    brand={p.brand}
                     title={p.title}
                     length={p.length}
+                    meta={p.meta}
                     price={p.price}
                     oldPrice={p.old}
                     badge={p.badge}
+                    rating={p.rating}
+                    reviews={p.reviews}
                     onClick={() => navigate("pdp-v2")}
                   />
                 ))}

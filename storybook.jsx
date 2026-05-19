@@ -111,6 +111,26 @@ const SBSection = ({ eyebrow, title, lead, children }) => (
   </section>
 );
 
+/* Live demo for the FilterSection / FilterCheck shared components */
+const SBFilterDemo = () => {
+  const [picks, setPicks] = React.useState(["women", "wavy"]);
+  const toggle = (v) => setPicks(p => p.includes(v) ? p.filter(x => x !== v) : [...p, v]);
+  return (
+    <div style={{ maxWidth: 280 }}>
+      <FilterSection title="Category">
+        {[{ v: "women", l: "Women" }, { v: "men", l: "Men" }].map(o => (
+          <FilterCheck key={o.v} checked={picks.includes(o.v)} onChange={() => toggle(o.v)} label={o.l} />
+        ))}
+      </FilterSection>
+      <FilterSection title="Texture" defaultOpen={false}>
+        {[{ v: "straight", l: "Straight" }, { v: "wavy", l: "Wavy" }, { v: "curly", l: "Curly" }].map(o => (
+          <FilterCheck key={o.v} checked={picks.includes(o.v)} onChange={() => toggle(o.v)} label={o.l} />
+        ))}
+      </FilterSection>
+    </div>
+  );
+};
+
 const Storybook = ({ navigate }) => {
   const [tab, setTab] = React.useState("oncology");
   const grid = (min) => ({ display: "grid", gridTemplateColumns: `repeat(auto-fill, minmax(${min}, 1fr))`, gap: "var(--space-md)" });
@@ -257,6 +277,9 @@ const Storybook = ({ navigate }) => {
           <SBItem title="View-all link" code=".link-view-all" note="Used on the right of section headers (product grids, recommendations) to jump to the full listing. A text link with a trailing arrow — deliberately a link, not a button, so it reads as secondary.">
             <a className="link-view-all">View all <Icon name="arrow-right" size={16} /></a>
           </SBItem>
+          <SBItem title="Filter accordion + checkbox" code="<FilterSection> / <FilterCheck>" note="Shared components in components.jsx — the PLP filter sidebar is built from them. FilterSection is a collapsible group (chevron rotates on toggle); FilterCheck is a controlled checkbox row with the green tick. Edit them once in components.jsx and every filter sidebar updates.">
+            <SBFilterDemo />
+          </SBItem>
         </div>
       </SBSection>
 
@@ -289,13 +312,18 @@ const Storybook = ({ navigate }) => {
           </SBItem>
           <SBItem title="ProductCard — global product card" code="SOURCE OF TRUTH → components.jsx › const ProductCard" note="This is the live ProductCard component — defined ONCE in components.jsx. The card below and every product grid (Home V2 / Oncology V2 recommendations, the PLP, Wigs V2) all render this same component, so editing ProductCard in components.jsx updates every one of them — including this storybook card. This demo shows the default card — badge, image, title, price. Optional props (hoverImage, brand, length, meta, rating + reviews, off, outOfStock) render only when supplied.">
             <ProductCard
-              image="images/wigs/plpwig.png"
+              image="images/Straight.jpg.webp"
+              hoverImage="images/wavy.webp"
               badge="Featured"
-              title="Adira premium wig"
-              price="₹4,800"
-              oldPrice="₹6,200"
+              brand="Adira"
+              title="Honey-highlight long wig"
+              length='20"'
               rating={4.9}
-              reviews={1240}
+              reviews={211}
+              meta="wavy · lace front"
+              price="₹7,800"
+              oldPrice="₹9,200"
+              off={15}
             />
           </SBItem>
           <SBItem title="Star rating — var(--star-yellow) · #F4B400" code='<Icon name="star" color="var(--star-yellow)" fill="var(--star-yellow)" />' note="The star icon always uses --star-yellow (#F4B400) for fill and stroke — never gold-600. Applied globally in ProductCard and all PDP rating rows.">

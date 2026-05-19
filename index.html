@@ -27,7 +27,6 @@
 <script type="text/babel" src="wigs-v2.jsx"></script>
 <script type="text/babel" src="pdp.jsx"></script>
 <script type="text/babel" src="pdp-v2.jsx"></script>
-<script type="text/babel" src="storybook.jsx"></script>
 
 <script type="text/babel">
 const { useState, useEffect } = React;
@@ -45,9 +44,7 @@ const App = () => {
         {page === "oncology-v2"    && <OncologyV2 navigate={navigate}/>}
         {page === "oncology-plp-v2"&& <OncologyPLPV2 navigate={navigate}/>}
         {page === "wigs-v2"        && <WigsV2 navigate={navigate}/>}
-        {page === "pdp"            && <PDP navigate={navigate}/>}
         {page === "pdp-v2"         && <PDPV2 navigate={navigate}/>}
-        {page === "storybook"      && <Storybook navigate={navigate}/>}
       </div>
       <Footer lightBg={page === "oncology-v2" || page === "wigs-v2"}/>
       {/* mini nav helper */}
@@ -61,13 +58,11 @@ const App = () => {
         fontSize: 12,
       }}>
         {[
-          { k: "home-v2",         l: "Home V2" },
+          { k: "home-v2",         l: "Home" },
           { k: "oncology-v2",     l: "Oncology" },
           { k: "oncology-plp-v2", l: "PLP" },
           { k: "wigs-v2",         l: "Wigs" },
           { k: "pdp-v2",          l: "Wig PDP" },
-          { k: "storybook",       l: "Storybook" },
-          { k: "pdp",             l: "PDP V1" },
         ].map(p => (
           <button key={p.k} onClick={() => navigate(p.k)} style={{
             padding: "8px 14px", borderRadius: 999,

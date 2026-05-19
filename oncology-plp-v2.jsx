@@ -34,18 +34,18 @@ const OncologyPLPV2 = ({ navigate }) => {
     setter(arr.includes(val) ? arr.filter(v => v !== val) : [...arr, val]);
 
   const allProducts = [
-    { id: 8,  title: "Honey-highlight long wig",     brand: "Adira",    price: 7800,  mrp: 9200,  img: "images/Straight.jpg.webp", category: "women", texture: "wavy",     length: '20"', cap: "lace-front",   stock: true,  rating: 4.9, reviews: 211, tag: "Featured" },
-    { id: 1,  title: "Premium wavy human-hair wig",  brand: "Adira",    price: 4800,  mrp: 6200,  img: "images/wig-pdp.webp",      category: "women", texture: "wavy",     length: '16"', cap: "hand-tied",    stock: true,  rating: 4.8, reviews: 124, tag: "Bestseller" },
-    { id: 2,  title: "Custom lace-front wig",        brand: "Adira",    price: 12500, mrp: 14800, img: "images/hair blonde 1.png", category: "women", texture: "straight", length: '20"', cap: "lace-front",   stock: true,  rating: 4.9, reviews: 47,  tag: "Featured" },
-    { id: 6,  title: "Curly body wave wig",          brand: "Reform",   price: 6200,  mrp: 7400,  img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&q=80", category: "women", texture: "curly", length: '16"', cap: "full-cap",     stock: true,  rating: 4.7, reviews: 64 },
-    { id: 7,  title: "Coily natural-finish wig",     brand: "Adira",    price: 6800,  mrp: 7900,  img: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=600&q=80", category: "women", texture: "kinky", length: '14"', cap: "full-cap",     stock: false, rating: 4.6, reviews: 38 },
-    { id: 12, title: "Lightweight wavy bob",         brand: "Calm Co.", price: 3800,  mrp: 4500,  img: "images/wavy.webp",         category: "women", texture: "wavy",     length: '12"', cap: "monofilament", stock: true,  rating: 4.6, reviews: 88,  tag: "20% OFF" },
-    { id: 10, title: "Discreet men's hairpiece",     brand: "Adira",    price: 6800,  mrp: 7800,  img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80", category: "men", texture: "straight", length: '8"', cap: "lace-front", stock: true,  rating: 4.7, reviews: 54 },
-    { id: 11, title: "Men's natural wave system",    brand: "Reform",   price: 5900,  mrp: 6800,  img: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=600&q=80", category: "men", texture: "wavy",     length: '8"', cap: "hand-tied",  stock: true,  rating: 4.5, reviews: 42 },
-    { id: 5,  title: "Long blonde with bangs",       brand: "Reform",   price: 5400,  mrp: 6500,  img: "images/wig-1.png",         category: "women", texture: "wavy",     length: '20"', cap: "full-cap",     stock: true,  rating: 4.5, reviews: 78,  tag: "20% OFF" },
-    { id: 4,  title: "Sleek bob with bangs",         brand: "Adira",    price: 4200,  mrp: 4900,  img: "images/wig-2.png",         category: "women", texture: "straight", length: '12"', cap: "hand-tied",    stock: true,  rating: 4.7, reviews: 156 },
-    { id: 3,  title: "Pixie blonde — ready to wear", brand: "Calm Co.", price: 3200,  mrp: 3900,  img: "images/wig-3.png",         category: "women", texture: "straight", length: '8"',  cap: "monofilament", stock: true,  rating: 4.6, reviews: 92 },
-    { id: 9,  title: "Salt & pepper bob",            brand: "Adira",    price: 4500,  mrp: 5400,  img: "images/wig-4.png",         category: "women", texture: "straight", length: '12"', cap: "hand-tied",    stock: true,  rating: 4.8, reviews: 110 },
+    { id: 8,  title: "Honey-highlight long wig",     brand: "Adira",    price: 7800,  mrp: 9200,  img: "images/wigs/plpwig.png",                                                   hoverImg: "images/Straight.jpg.webp",                                             category: "women", texture: "wavy",     length: '20"', cap: "lace-front",   stock: true,  rating: 4.9, reviews: 211, tag: "Featured" },
+    { id: 1,  title: "Premium wavy human-hair wig",  brand: "Adira",    price: 4800,  mrp: 6200,  img: "images/wigs/96b2e5b9-0803-40a8-8252-d3adc67524a9.png",                    hoverImg: "images/wig-pdp.webp",                                                  category: "women", texture: "wavy",     length: '16"', cap: "hand-tied",    stock: true,  rating: 4.8, reviews: 124, tag: "Bestseller" },
+    { id: 2,  title: "Custom lace-front wig",        brand: "Adira",    price: 12500, mrp: 14800, img: "images/wigs/ce685f55-6a60-4357-9e06-f6ac359149ca.png",                    hoverImg: "images/hair blonde 1.png",                                             category: "women", texture: "straight", length: '20"', cap: "lace-front",   stock: true,  rating: 4.9, reviews: 47,  tag: "Featured" },
+    { id: 6,  title: "Curly body wave wig",          brand: "Reform",   price: 6200,  mrp: 7400,  img: "images/wigs/plpwig.png",                                                   hoverImg: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&q=80", category: "women", texture: "curly",    length: '16"', cap: "full-cap",     stock: true,  rating: 4.7, reviews: 64 },
+    { id: 7,  title: "Coily natural-finish wig",     brand: "Adira",    price: 6800,  mrp: 7900,  img: "images/wigs/96b2e5b9-0803-40a8-8252-d3adc67524a9.png",                    hoverImg: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=600&q=80", category: "women", texture: "kinky",    length: '14"', cap: "full-cap",     stock: false, rating: 4.6, reviews: 38 },
+    { id: 12, title: "Lightweight wavy bob",         brand: "Calm Co.", price: 3800,  mrp: 4500,  img: "images/wigs/ce685f55-6a60-4357-9e06-f6ac359149ca.png",                    hoverImg: "images/wavy.webp",                                                     category: "women", texture: "wavy",     length: '12"', cap: "monofilament", stock: true,  rating: 4.6, reviews: 88,  tag: "20% OFF" },
+    { id: 10, title: "Discreet men's hairpiece",     brand: "Adira",    price: 6800,  mrp: 7800,  img: "images/wigs/plpwig.png",                                                   hoverImg: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80", category: "men",   texture: "straight", length: '8"',  cap: "lace-front",   stock: true,  rating: 4.7, reviews: 54 },
+    { id: 11, title: "Men's natural wave system",    brand: "Reform",   price: 5900,  mrp: 6800,  img: "images/wigs/96b2e5b9-0803-40a8-8252-d3adc67524a9.png",                    hoverImg: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=600&q=80",  category: "men",   texture: "wavy",     length: '8"',  cap: "hand-tied",    stock: true,  rating: 4.5, reviews: 42 },
+    { id: 5,  title: "Long blonde with bangs",       brand: "Reform",   price: 5400,  mrp: 6500,  img: "images/wigs/ce685f55-6a60-4357-9e06-f6ac359149ca.png",                    hoverImg: "images/wig-1.png",                                                     category: "women", texture: "wavy",     length: '20"', cap: "full-cap",     stock: true,  rating: 4.5, reviews: 78,  tag: "20% OFF" },
+    { id: 4,  title: "Sleek bob with bangs",         brand: "Adira",    price: 4200,  mrp: 4900,  img: "images/wigs/plpwig.png",                                                   hoverImg: "images/wig-2.png",                                                     category: "women", texture: "straight", length: '12"', cap: "hand-tied",    stock: true,  rating: 4.7, reviews: 156 },
+    { id: 3,  title: "Pixie blonde — ready to wear", brand: "Calm Co.", price: 3200,  mrp: 3900,  img: "images/wigs/96b2e5b9-0803-40a8-8252-d3adc67524a9.png",                    hoverImg: "images/wig-3.png",                                                     category: "women", texture: "straight", length: '8"',  cap: "monofilament", stock: true,  rating: 4.6, reviews: 92 },
+    { id: 9,  title: "Salt & pepper bob",            brand: "Adira",    price: 4500,  mrp: 5400,  img: "images/wigs/ce685f55-6a60-4357-9e06-f6ac359149ca.png",                    hoverImg: "images/wig-4.png",                                                     category: "women", texture: "straight", length: '12"', cap: "hand-tied",    stock: true,  rating: 4.8, reviews: 110 },
   ];
 
   const categoryOptions = [
@@ -93,35 +93,7 @@ const OncologyPLPV2 = ({ navigate }) => {
     setBrands([]); setRating(0);
   };
 
-  const Section = ({ title, children, defaultOpen = true }) => {
-    const [open, setOpen] = React.useState(defaultOpen);
-    return (
-      <div style={{ borderBottom: "1px solid rgba(20,32,27,.08)", padding: "var(--space-md) 0" }}>
-        <button onClick={() => setOpen(!open)} style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 14, fontWeight: 600, letterSpacing: "-.005em", color: "var(--ink-900)" }}>
-          {title}
-          <span style={{ display: "inline-flex", transform: open ? "rotate(90deg)" : "none", transition: "transform 200ms var(--ease-out)", color: "var(--ink-400)" }}>
-            <Icon name="chevron" size={14} />
-          </span>
-        </button>
-        {open && <div style={{ marginTop: "var(--space-sm)" }}>{children}</div>}
-      </div>
-    );
-  };
-
-  const Check = ({ checked, onChange, label }) => (
-    <label style={{ display: "flex", alignItems: "flex-start", gap: "var(--space-xs)", padding: "6px 0", cursor: "pointer" }}>
-      <span style={{
-        width: 16, height: 16, borderRadius: "var(--radius-xs)", marginTop: 2,
-        border: `1.5px solid ${checked ? "var(--green-cta)" : "rgba(20,32,27,.25)"}`,
-        background: checked ? "var(--green-cta)" : "transparent",
-        display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
-      }}>
-        {checked && <Icon name="check" size={11} color="var(--white)" />}
-      </span>
-      <input type="checkbox" checked={checked} onChange={onChange} style={{ display: "none" }} />
-      <div style={{ fontSize: 13.5, color: "var(--ink-700)", lineHeight: 1.3 }}>{label}</div>
-    </label>
-  );
+  /* FilterSection + FilterCheck are shared components in components.jsx */
 
   const sortOptions = [
     { v: "relevance",   l: "Relevance" },
@@ -152,11 +124,11 @@ const OncologyPLPV2 = ({ navigate }) => {
 
       {/* ── LISTING — filters + product grid ─────────── */}
       <section style={{ paddingTop: "var(--space-lg)", paddingBottom: "var(--space-section)" }}>
-        <div className="shell" style={{ display: "grid", gridTemplateColumns: "260px 1fr", gap: "var(--space-lg)", alignItems: "flex-start" }}>
+        <div className="shell" style={{ display: "grid", gridTemplateColumns: "260px 1fr", gap: "var(--space-lg)" }}>
 
           {/* FILTERS */}
-          <aside style={{ position: "sticky", top: 76, alignSelf: "flex-start" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingBottom: "var(--space-sm)", borderBottom: "1px solid rgba(20,32,27,.1)" }}>
+          <aside style={{ position: "sticky", top: 76, height: "fit-content", maxHeight: "calc(100vh - 96px)", display: "flex", flexDirection: "column" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingBottom: "var(--space-sm)", borderBottom: "1px solid rgba(20,32,27,.1)", flexShrink: 0 }}>
               <div style={{ fontSize: 15, fontWeight: 600, letterSpacing: "-.01em", color: "var(--ink-900)", display: "inline-flex", alignItems: "center", gap: "var(--space-xs)" }}>
                 Filters
                 {activeFilterCount > 0 && (
@@ -168,51 +140,53 @@ const OncologyPLPV2 = ({ navigate }) => {
               )}
             </div>
 
-            <Section title="Category">
-              {categoryOptions.map(c => (
-                <Check key={c.v} checked={categories.includes(c.v)} onChange={() => toggle(c.v, setCategories, categories)} label={c.l} />
-              ))}
-            </Section>
-            <Section title="Texture">
-              {textureOptions.map(t => (
-                <Check key={t.v} checked={textures.includes(t.v)} onChange={() => toggle(t.v, setTextures, textures)} label={t.l} />
-              ))}
-            </Section>
-            <Section title="Length">
-              {lengthOptions.map(l => (
-                <Check key={l.v} checked={lengths.includes(l.v)} onChange={() => toggle(l.v, setLengths, lengths)} label={l.l} />
-              ))}
-            </Section>
-            <Section title="Cap construction">
-              {capOptions.map(c => (
-                <Check key={c.v} checked={caps.includes(c.v)} onChange={() => toggle(c.v, setCaps, caps)} label={c.l} />
-              ))}
-            </Section>
-            <Section title="Price range">
-              <div style={{ fontSize: 12, color: "var(--ink-500)", marginBottom: "var(--space-xs)" }}>
-                Up to <span style={{ color: "var(--ink-900)", fontWeight: 600 }}>₹{priceMax.toLocaleString("en-IN")}</span>
-              </div>
-              <input type="range" min={2000} max={15000} step={100} value={priceMax} onChange={e => setPriceMax(parseInt(e.target.value))} style={{ width: "100%", accentColor: "var(--green-cta)" }} />
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11.5, color: "var(--ink-400)", marginTop: 4 }}>
-                <span>₹2,000</span><span>₹15,000+</span>
-              </div>
-            </Section>
-            <Section title="Brand" defaultOpen={false}>
-              {brandOptions.map(b => (
-                <Check key={b} checked={brands.includes(b)} onChange={() => toggle(b, setBrands, brands)} label={b} />
-              ))}
-            </Section>
-            <Section title="Customer rating" defaultOpen={false}>
-              {[4.5, 4, 3.5, 0].map(r => (
-                <label key={r} style={{ display: "flex", alignItems: "center", gap: "var(--space-xs)", padding: "6px 0", cursor: "pointer" }}>
-                  <input type="radio" checked={rating === r} onChange={() => setRating(r)} style={{ accentColor: "var(--green-cta)" }} />
-                  <span style={{ fontSize: 13, color: "var(--ink-700)" }}>{r === 0 ? "All ratings" : `${r}+ & up`}</span>
-                </label>
-              ))}
-            </Section>
-            <Section title="Availability">
-              <Check checked={inStock} onChange={() => setInStock(!inStock)} label="In stock" />
-            </Section>
+            <div style={{ overflowY: "auto", flex: 1, paddingRight: 4, scrollbarWidth: "thin", scrollbarColor: "rgba(20,32,27,.15) transparent" }}>
+              <FilterSection title="Category">
+                {categoryOptions.map(c => (
+                  <FilterCheck key={c.v} checked={categories.includes(c.v)} onChange={() => toggle(c.v, setCategories, categories)} label={c.l} />
+                ))}
+              </FilterSection>
+              <FilterSection title="Texture">
+                {textureOptions.map(t => (
+                  <FilterCheck key={t.v} checked={textures.includes(t.v)} onChange={() => toggle(t.v, setTextures, textures)} label={t.l} />
+                ))}
+              </FilterSection>
+              <FilterSection title="Length">
+                {lengthOptions.map(l => (
+                  <FilterCheck key={l.v} checked={lengths.includes(l.v)} onChange={() => toggle(l.v, setLengths, lengths)} label={l.l} />
+                ))}
+              </FilterSection>
+              <FilterSection title="Cap construction">
+                {capOptions.map(c => (
+                  <FilterCheck key={c.v} checked={caps.includes(c.v)} onChange={() => toggle(c.v, setCaps, caps)} label={c.l} />
+                ))}
+              </FilterSection>
+              <FilterSection title="Price range">
+                <div style={{ fontSize: 12, color: "var(--ink-500)", marginBottom: "var(--space-xs)" }}>
+                  Up to <span style={{ color: "var(--ink-900)", fontWeight: 600 }}>₹{priceMax.toLocaleString("en-IN")}</span>
+                </div>
+                <input type="range" min={2000} max={15000} step={100} value={priceMax} onChange={e => setPriceMax(parseInt(e.target.value))} style={{ width: "100%", accentColor: "var(--green-cta)" }} />
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11.5, color: "var(--ink-400)", marginTop: 4 }}>
+                  <span>₹2,000</span><span>₹15,000+</span>
+                </div>
+              </FilterSection>
+              <FilterSection title="Brand" defaultOpen={false}>
+                {brandOptions.map(b => (
+                  <FilterCheck key={b} checked={brands.includes(b)} onChange={() => toggle(b, setBrands, brands)} label={b} />
+                ))}
+              </FilterSection>
+              <FilterSection title="Customer rating" defaultOpen={false}>
+                {[4.5, 4, 3.5, 0].map(r => (
+                  <label key={r} style={{ display: "flex", alignItems: "center", gap: "var(--space-xs)", padding: "6px 0", cursor: "pointer" }}>
+                    <input type="radio" checked={rating === r} onChange={() => setRating(r)} style={{ accentColor: "var(--green-cta)" }} />
+                    <span style={{ fontSize: 13, color: "var(--ink-700)" }}>{r === 0 ? "All ratings" : `${r}+ & up`}</span>
+                  </label>
+                ))}
+              </FilterSection>
+              <FilterSection title="Availability">
+                <FilterCheck checked={inStock} onChange={() => setInStock(!inStock)} label="In stock" />
+              </FilterSection>
+            </div>
           </aside>
 
           {/* PRODUCTS */}
@@ -220,7 +194,7 @@ const OncologyPLPV2 = ({ navigate }) => {
             {/* Sort row: count (left) + sort dropdown (right) */}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "var(--space-sm)" }}>
               <span style={{ fontSize: 13.5, color: "var(--ink-500)" }}>
-                <span style={{ fontWeight: 600, color: "var(--ink-900)" }}>{products.length}</span> of {allProducts.length} wigs
+                Showing <span style={{ fontWeight: 600, color: "var(--ink-900)" }}>{products.length}</span> of {allProducts.length} wigs
               </span>
               {/* Custom sort dropdown */}
               <div ref={sortRef} style={{ position: "relative" }}>
@@ -307,13 +281,14 @@ const OncologyPLPV2 = ({ navigate }) => {
                 <button onClick={clearAll} className="btn btn-primary btn-sm" style={{ marginTop: "var(--space-md)", justifyContent: "center" }}>Clear all filters</button>
               </div>
             ) : (
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "var(--space-base)" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "var(--space-base)" }}>
                 {products.map(p => {
                   const off = Math.round((1 - p.price / p.mrp) * 100);
                   return (
                     <ProductCard
                       key={p.id}
                       image={p.img}
+                      hoverImage={p.hoverImg}
                       title={p.title}
                       length={p.length}
                       price={`₹${p.price.toLocaleString("en-IN")}`}
