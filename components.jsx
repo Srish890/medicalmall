@@ -607,7 +607,7 @@ const ProductCard = ({
         </div>
         {rating != null && (
           <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: "var(--space-xs)" }}>
-            <Icon name="star" size={14} color="var(--gold-600)" fill="var(--gold-600)" />
+            <Icon name="star" size={14} color="var(--star-yellow)" fill="var(--star-yellow)" />
             <span style={{ fontSize: 13, fontWeight: 600, color: "var(--ink-900)" }}>{rating}</span>
             {reviews != null && <span style={{ fontSize: 13, color: "var(--ink-400)" }}>({reviews})</span>}
           </div>

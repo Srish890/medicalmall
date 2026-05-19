@@ -8,9 +8,10 @@ const SB_TOKENS = {
     { name: "green-900",  val: "#0E2A20", desc: "Darkest green — hero, footer and reassurance-banner backgrounds, plus headings on dark surfaces." },
     { name: "green-800",  val: "#0F6A2E", desc: "Mid-dark green — button hover states and secondary dark surfaces." },
     { name: "green-100",  val: "#DDE9E1", desc: "Pale green tint — soft section backgrounds and subtle fills." },
-    { name: "gold-600",   val: "#B58A3D", desc: "Deep gold — gold text on light surfaces and the 'Home Page' scope tag." },
-    { name: "gold-300",   val: "#E2C896", desc: "Signature gold accent — gold rules, badges, active-pill highlight and the hero emphasis word." },
-    { name: "gold-100",   val: "#F3E8D0", desc: "Pale gold wash — badge backgrounds and warm tinted surfaces." },
+    { name: "gold-600",      val: "#B58A3D", desc: "Deep gold — gold text on light surfaces and the 'Home Page' scope tag." },
+    { name: "gold-300",      val: "#E2C896", desc: "Signature gold accent — gold rules, badges, active-pill highlight and the hero emphasis word." },
+    { name: "gold-100",      val: "#F3E8D0", desc: "Pale gold wash — badge backgrounds and warm tinted surfaces." },
+    { name: "star-yellow",   val: "#F4B400", desc: "Star rating colour — used exclusively for filled star icons on all product cards and PDPs." },
     { name: "ink-900",    val: "#14201B", desc: "Primary text — all headings and card titles; the strongest text colour." },
     { name: "ink-700",    val: "#2A3833", desc: "Secondary text — body copy, prices, and ghost/secondary button labels." },
     { name: "ink-500",    val: "#4F5C56", desc: "Muted text — leads, captions and supporting copy under headings." },
@@ -293,7 +294,19 @@ const Storybook = ({ navigate }) => {
               title="Adira premium wig"
               price="₹4,800"
               oldPrice="₹6,200"
+              rating={4.9}
+              reviews={1240}
             />
+          </SBItem>
+          <SBItem title="Star rating — var(--star-yellow) · #F4B400" code='<Icon name="star" color="var(--star-yellow)" fill="var(--star-yellow)" />' note="The star icon always uses --star-yellow (#F4B400) for fill and stroke — never gold-600. Applied globally in ProductCard and all PDP rating rows.">
+            <div style={{ display: "flex", alignItems: "center", gap: "var(--space-md)", flexWrap: "wrap" }}>
+              {[3.8, 4.2, 4.7, 4.9].map(r => (
+                <div key={r} style={{ display: "inline-flex", alignItems: "center", gap: 5, padding: "6px 12px", background: "var(--white)", borderRadius: "var(--radius-full)", border: "1px solid rgba(20,32,27,.08)", boxShadow: "var(--shadow-sm)" }}>
+                  <Icon name="star" size={14} color="var(--star-yellow)" fill="var(--star-yellow)" />
+                  <span style={{ fontSize: 13, fontWeight: 600, color: "var(--ink-900)" }}>{r}</span>
+                </div>
+              ))}
+            </div>
           </SBItem>
         </div>
       </SBSection>

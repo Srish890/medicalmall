@@ -64,7 +64,7 @@ const PDPV2 = ({ navigate }) => {
   const offers = [
     { tag: "First-time",  code: "CARE100",  title: "₹500 off your first wig",      sub: "Min order ₹3,000",               color: "var(--green-700)",  bg: "var(--green-50)",   icon: "sparkle" },
     { tag: "HDFC Bank",   code: "HDFC10",   title: "10% instant discount",          sub: "Up to ₹1,500 · Credit cards",    color: "#0046AD",           bg: "#EAF1FA",           icon: "shield"  },
-    { tag: "Care Credit", code: "AUTO",     title: "No-cost EMI on care plans",     sub: "Auto-applied at checkout",        color: "#8a6a2a",           bg: "var(--gold-100)",   icon: "ribbon"  },
+    { tag: "Care Credit", code: "AUTO",     title: "No-cost EMI on care plans",     sub: "Auto-applied at checkout",        color: "var(--gold-600)",   bg: "var(--gold-100)",   icon: "ribbon"  },
     { tag: "Survivor",    code: "STRONG20", title: "20% off — survivor program",    sub: "Verify with onco team",           color: "var(--rose-500)",   bg: "var(--rose-100)",   icon: "heart"   },
     { tag: "Free",        code: "—",        title: "Free private fitting",          sub: "Auto-applied · 14 hospitals",     color: "var(--ink-700)",    bg: "var(--paper)",      icon: "stethoscope" },
   ];
@@ -164,16 +164,10 @@ const PDPV2 = ({ navigate }) => {
               </h1>
 
               {/* Rating row */}
-              <div style={{ display: "flex", alignItems: "center", gap: "var(--space-md)", marginBottom: "var(--space-lg)" }}>
-                <div style={{ display: "inline-flex", alignItems: "center", gap: 5 }}>
-                  <Icon name="star" size={15} color="var(--gold-600)" fill="var(--gold-600)" />
-                  <span style={{ fontSize: 13.5, fontWeight: 600, color: "var(--ink-900)" }}>4.9</span>
-                </div>
-                <span style={{ fontSize: 13, color: "var(--ink-500)" }}>1,240 patient stories</span>
-                <span style={{ width: 3, height: 3, borderRadius: "var(--radius-full)", background: "var(--ink-300)", flexShrink: 0 }} />
-                <span style={{ fontSize: 13, color: "var(--green-700)", fontWeight: 500, display: "inline-flex", alignItems: "center", gap: 4 }}>
-                  <Icon name="check" size={13} color="var(--green-700)" /> 2,800+ patients
-                </span>
+              <div style={{ display: "flex", alignItems: "center", gap: "var(--space-xs)", marginBottom: "var(--space-lg)" }}>
+                <Icon name="star" size={15} color="var(--star-yellow)" fill="var(--star-yellow)" />
+                <span style={{ fontSize: 13.5, fontWeight: 600, color: "var(--ink-900)" }}>4.9</span>
+                <span style={{ fontSize: 13, color: "var(--green-700)" }}>(1,240 patient stories)</span>
               </div>
 
               {/* Price */}
@@ -189,7 +183,7 @@ const PDPV2 = ({ navigate }) => {
               {/* Length selector */}
               <div style={{ marginBottom: "var(--space-lg)" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "var(--space-sm)" }}>
-                  <span className="eyebrow" style={{ fontSize: 12.5, marginBottom: 0 }}>Length</span>
+                  <span className="eyebrow" style={{ fontSize: 12.5, marginBottom: 0, color: "var(--ink-700)" }}>Length</span>
                   <span style={{ fontSize: 12, color: "var(--ink-500)" }}>Selected: <strong style={{ color: "var(--ink-900)", fontWeight: 500 }}>{length}</strong></span>
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "var(--space-xs)" }}>
@@ -197,8 +191,14 @@ const PDPV2 = ({ navigate }) => {
                     <button
                       key={l}
                       onClick={() => setLength(l)}
-                      className={length === l ? "pill-tab is-active" : "pill-tab"}
-                      style={{ borderRadius: "var(--radius-sm)", textAlign: "center" }}
+                      style={{
+                        padding: "10px var(--space-sm)", borderRadius: "var(--radius-sm)", fontSize: 13, cursor: "pointer",
+                        background: length === l ? "var(--green-50)" : "var(--white)",
+                        border: length === l ? "1.5px solid var(--green-700)" : "1px solid rgba(20,32,27,.10)",
+                        color: length === l ? "var(--green-800)" : "var(--ink-700)",
+                        fontWeight: length === l ? 500 : 400,
+                        transition: "all 160ms ease",
+                      }}
                     >
                       {l}
                     </button>
@@ -209,7 +209,7 @@ const PDPV2 = ({ navigate }) => {
               {/* Colour selector */}
               <div style={{ marginBottom: "var(--space-lg)" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "var(--space-sm)" }}>
-                  <span className="eyebrow" style={{ fontSize: 12.5, marginBottom: 0 }}>Hair colour</span>
+                  <span className="eyebrow" style={{ fontSize: 12.5, marginBottom: 0, color: "var(--ink-700)" }}>Hair colour</span>
                   <span style={{ fontSize: 12, color: "var(--ink-500)" }}>Selected: <strong style={{ color: "var(--ink-900)", fontWeight: 500 }}>{color}</strong></span>
                 </div>
                 <div style={{ display: "flex", gap: "var(--space-sm)" }}>
@@ -230,20 +230,23 @@ const PDPV2 = ({ navigate }) => {
                 </div>
               </div>
 
-              {/* Try-on prompt — card-paper per design.md */}
+              {/* Try-on prompt */}
               <button
                 onClick={() => setTryOn(true)}
-                className="card-paper"
-                style={{ width: "100%", textAlign: "left", display: "flex", alignItems: "center", gap: "var(--space-md)", cursor: "pointer", border: "1px solid rgba(20,32,27,.08)", marginBottom: "var(--space-lg)", padding: "var(--space-md)" }}
+                style={{
+                  marginBottom: "var(--space-lg)", width: "100%", textAlign: "left",
+                  background: "var(--paper)", border: "1px dashed rgba(20,32,27,.20)",
+                  padding: "var(--space-base)", borderRadius: "var(--radius-md)", display: "flex", alignItems: "center", gap: "var(--space-sm)", cursor: "pointer",
+                }}
               >
-                <div style={{ width: 44, height: 44, borderRadius: "var(--radius-md)", background: "var(--green-cta)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <div style={{ width: 44, height: 44, borderRadius: "var(--radius-sm)", background: "var(--green-700)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                   <Icon name="sparkle" size={20} color="var(--gold-300)" />
                 </div>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 14, fontWeight: 500, color: "var(--ink-900)", marginBottom: 3 }}>See it on you — privately.</div>
-                  <div style={{ fontSize: 13, color: "var(--ink-500)", lineHeight: 1.5 }}>Upload one photo. Try every length and colour. Nothing is saved — your photo never leaves your device.</div>
+                  <div style={{ fontSize: 14.5, fontWeight: 500, color: "var(--ink-900)" }}>See it on you — privately.</div>
+                  <div style={{ fontSize: 13, color: "var(--ink-500)", marginTop: 2, lineHeight: 1.5 }}>Upload one photo. Try every length and colour. Nothing is saved — your photo never leaves your device.</div>
                 </div>
-                <Icon name="arrow-right" size={16} color="var(--ink-400)" />
+                <Icon name="arrow-right" size={18} color="var(--ink-700)" />
               </button>
 
               {/* CTA row */}
@@ -274,7 +277,7 @@ const PDPV2 = ({ navigate }) => {
                   { i: "lock",        t: "Discreet packaging, always" },
                   { i: "phone",       t: "30-day care line for fit issues" },
                 ].map(t => (
-                  <div key={t.t} style={{ display: "flex", gap: "var(--space-sm)", alignItems: "center", padding: "10px var(--space-sm)", background: "var(--white)", borderRadius: "var(--radius-sm)", border: "1px solid rgba(20,32,27,.06)", boxShadow: "var(--shadow-sm)" }}>
+                  <div key={t.t} style={{ display: "flex", gap: "var(--space-sm)", alignItems: "center", padding: "10px var(--space-sm)", background: "var(--white)", borderRadius: "var(--radius-sm)", border: "1px solid rgba(20,32,27,.06)" }}>
                     <Icon name={t.i} size={14} color="var(--green-700)" />
                     <span style={{ fontSize: 12.5, color: "var(--ink-700)", lineHeight: 1.35 }}>{t.t}</span>
                   </div>
@@ -426,7 +429,12 @@ const PDPV2 = ({ navigate }) => {
               {tab === "faq" && (
                 <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-xs)" }}>
                   {faqs.map(q => (
-                    <div key={q} className="card-paper" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "var(--space-md)" }}>
+                    <div key={q} style={{
+                      display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center",
+                      gap: "var(--space-md)", padding: "var(--space-md)",
+                      background: "var(--paper-2)", borderRadius: "var(--radius-md)",
+                      border: "1px solid rgba(20,32,27,.06)",
+                    }}>
                       <span style={{ fontSize: 14, color: "var(--ink-900)", fontWeight: 400 }}>{q}</span>
                       <Icon name="plus" size={16} color="var(--ink-400)" />
                     </div>
@@ -477,7 +485,7 @@ const PDPV2 = ({ navigate }) => {
 
 
       {/* ── COMPLEMENTARY CARE ─────────────────────────────── */}
-      <section style={{ padding: "var(--space-section) 0", background: "var(--paper)" }}>
+      <section style={{ padding: "var(--space-section) 0", background: "var(--white)" }}>
         <div className="shell">
           <div style={{ marginBottom: "var(--space-xl)" }}>
             <div className="eyebrow">
