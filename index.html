@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.cdnfonts.com/css/clear-sans" rel="stylesheet"/>
 <link rel="stylesheet" href="Satoshi_Complete/Fonts/WEB/css/satoshi.css"/>
 <link rel="stylesheet" href="styles.css"/>
@@ -27,6 +27,7 @@
 <script type="text/babel" src="wigs-v2.jsx"></script>
 <script type="text/babel" src="pdp.jsx"></script>
 <script type="text/babel" src="pdp-v2.jsx"></script>
+<script type="text/babel" src="ar-kiosk.jsx"></script>
 
 <script type="text/babel">
 const { useState, useEffect } = React;
@@ -35,6 +36,36 @@ const App = () => {
   const [page, setPage] = useState("home-v2");
   const [chatOpen, setChatOpen] = useState(false);
   const navigate = (p) => { setPage(p); window.scrollTo({ top: 0, behavior: "instant" }); };
+
+  /* Kiosk is fully standalone — no Header/Footer */
+  if (page === "ar-kiosk") {
+    return (
+      <>
+        <ARKioskApp />
+        <div style={{
+          position: "fixed", bottom: 28, left: 28, zIndex: 9999,
+          background: "rgba(20,32,27,.92)", color: "#F4EFE6",
+          borderRadius: 999, padding: 5,
+          display: "flex", gap: 4,
+          boxShadow: "0 14px 30px -10px rgba(20,32,27,.5)",
+          backdropFilter: "blur(10px)",
+          fontSize: 12,
+        }}>
+          <button onClick={() => navigate("home-v2")} style={{
+            padding: "8px 14px", borderRadius: 999,
+            background: "transparent", color: "#F4EFE6",
+            fontFamily: "var(--mono)", letterSpacing: ".05em", textTransform: "uppercase",
+          }}>← Back to Site</button>
+          <button style={{
+            padding: "8px 14px", borderRadius: 999,
+            background: "#E2C896", color: "var(--green-900)",
+            fontWeight: 500,
+            fontFamily: "var(--mono)", letterSpacing: ".05em", textTransform: "uppercase",
+          }}>AR Kiosk</button>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
@@ -63,6 +94,7 @@ const App = () => {
           { k: "oncology-plp-v2", l: "PLP" },
           { k: "wigs-v2",         l: "Wigs" },
           { k: "pdp-v2",          l: "Wig PDP" },
+          { k: "ar-kiosk",        l: "AR Kiosk" },
         ].map(p => (
           <button key={p.k} onClick={() => navigate(p.k)} style={{
             padding: "8px 14px", borderRadius: 999,

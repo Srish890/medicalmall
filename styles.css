@@ -634,3 +634,51 @@ a { color: inherit; text-decoration: none; }
 }
 
 .specialists-rail::-webkit-scrollbar { display: none; }
+
+/* ==========================================================================
+   PP Neue Montreal — local OTF faces. Registered globally so any page can
+   reference `font-family: "PP Neue Montreal"`. Used by the AR kiosk.
+   ========================================================================== */
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("fonts/neue-montreal/ppneuemontreal-thin.otf") format("opentype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("fonts/neue-montreal/ppneuemontreal-book.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("fonts/neue-montreal/ppneuemontreal-italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("fonts/neue-montreal/ppneuemontreal-medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("fonts/neue-montreal/ppneuemontreal-semibolditalic.otf") format("opentype");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("fonts/neue-montreal/ppneuemontreal-bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
